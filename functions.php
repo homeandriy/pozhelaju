@@ -114,7 +114,7 @@ function pozhelaju_widgets_init() {
 		'after_title'   => '</h2>',
 	) );
     register_sidebar( array(
-        'name'          => esc_html__( 'Menu', 'pozhelaju' ),
+        'name'          => 'Menu',
         'id'            => 'sidebar-2',
         'description'   => esc_html__( 'Add menu.', 'pozhelaju' ),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
@@ -168,5 +168,26 @@ require get_template_directory() . '/inc/customizer.php';
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
+}
+
+function pagination() { // функция вывода пагинации
+    global $wp_query; // текущая выборка должна быть глобальной
+    $big = 999999999; // число для замены
+    echo paginate_links(array( // вывод пагинации с опциями ниже
+        'base' => str_replace($big,'%#%',esc_url(get_pagenum_link($big))), // что заменяем в формате ниже
+        'format' => '?paged=%#%', // формат, %#% будет заменено
+        'current' => max(1, get_query_var('paged')), // текущая страница, 1, если $_GET['page'] не определено
+        'total' => $wp_query->max_num_pages, // общие кол-во страниц в пагинации
+        'type' => 'list', // ссылки в ul
+        'prev_text'    => '<i class="fa fa-arrow-left"></i>&nbspНазад', // текст назад
+        'next_text'    => 'Еще &nbsp<i class="fa fa-arrow-right"></i>', // текст вперед
+        'show_all'     => false, // не показывать ссылки на все страницы, иначе end_size и mid_size будут проигнорированны
+        'end_size'     => 3, //  сколько страниц показать в начале и конце списка (12 ... 4 ... 89)
+        'mid_size'     => 3, // сколько страниц показать вокруг текущей страницы (... 123 5 678 ...).
+        'add_args'     => false, // массив GET параметров для добавления в ссылку страницы
+        'add_fragment' => '',	// строка для добавления в конец ссылки на страницу
+        'before_page_number' => '', // строка перед цифрой
+        'after_page_number' => '' // строка после цифры
+    ));
 }
 
