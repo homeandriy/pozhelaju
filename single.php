@@ -13,7 +13,7 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main container">
             <div class="row">
-                <div class="col-sm-3"><h2>menu</h2></div>
+                <div class="col-sm-3"><?php  get_sidebar('Menu'); ?></div>
                 <div class="col-sm-6">
                     <?php
                     while ( have_posts() ) :
