@@ -13,8 +13,16 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main container">
             <div class="row">
-                <div class="col-sm-3"><?php  get_sidebar('Menu'); ?></div>
-                <div class="col-sm-6">
+                <div class="col-lg-3 hidden-sm hidden-xs"><?php  get_template_part('template-parts/menu', 'global') ?></div>
+                <div class="col-lg-6 main-content">
+                    <section class="" itemscope itemtype="http://schema.org/Article" >
+                        <div class="wrapper-post single-list-category bootom-border shadow" >
+                            <?php if(function_exists('bcn_display'))
+                            {
+                                bcn_display();
+                            }?>
+                        </div>
+                    </section>
                     <?php
                     while ( have_posts() ) :
                         the_post();
@@ -31,7 +39,7 @@ get_header();
                     endwhile; // End of the loop.
                     ?>
                 </div>
-                <div class="col-sm-3"><?php  get_sidebar('Sidebar'); ?></div>
+                <div class="col-lg-3 hidden-sm hidden-xs"><?php  get_sidebar(); ?></div>
             </div>
 		</main><!-- #main -->
 	</div><!-- #primary -->

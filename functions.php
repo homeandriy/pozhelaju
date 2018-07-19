@@ -129,10 +129,10 @@ add_action( 'widgets_init', 'pozhelaju_widgets_init' );
  * Enqueue scripts and styles.
  */
 function pozhelaju_scripts() {
-	wp_enqueue_style( 'pozhelaju-style', get_stylesheet_uri() );
     wp_enqueue_style( 'pozhelaju-bt', get_stylesheet_directory_uri().'/css/bootstrap.css' );
+    wp_enqueue_style( 'pozhelaju-style', get_stylesheet_uri() );
 
-	wp_enqueue_script( 'pozhelaju-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+    wp_enqueue_script( 'pozhelaju-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'pozhelaju-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
     wp_enqueue_script( 'pozhelaju-bt_js', get_stylesheet_directory_uri() . '/js/bootstrap.js', array(), '20151215', true );

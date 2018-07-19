@@ -469,7 +469,7 @@ html {
 }
 
 body {
-	background: #fff;
+	background: #fafafa;
 	/* Fallback for when there is no custom background color defined. */
 }
 
@@ -981,4 +981,38 @@ object {
 
 .gallery-caption {
 	display: block;
+}
+
+.sidebar-box-heading {
+	background: #9b59b6;
+	color: #fff;
+	text-transform: uppercase;
+	overflow: hidden;
+	height: 50px;
+	padding: 12px 20px 12px 40px;
+}
+.sidebar-box-content {
+	background: #fff;
+	box-sizing: border-box;
+	border: 1px	solid #ccc;
+	-webkit-box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);
+	-moz-box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);
+	box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);
+}
+.shadow {
+	border: 1px	solid #ccc;
+	-webkit-box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);
+	-moz-box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);
+	box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);
+}
+
+.bootom-border {
+	border-bottom: 3px solid #f5791f;
+}
+.single-list-category {
+	display: block;
+	padding: 15px;
+	margin-bottom: 20px;
+	overflow-y: hidden;
+	background-color: #fff;
 }
