@@ -110,8 +110,8 @@ function pozhelaju_widgets_init() {
 		'description'   => esc_html__( 'Add widgets here.', 'pozhelaju' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'before_title'  => '<h4 class="widget-title left-widget">',
+		'after_title'   => '</h4>',
 	) );
     register_sidebar( array(
         'name'          => 'Menu',
@@ -132,10 +132,12 @@ function pozhelaju_scripts() {
     wp_enqueue_style( 'pozhelaju-bt', get_stylesheet_directory_uri().'/css/bootstrap.css' );
     wp_enqueue_style( 'pozhelaju-style', get_stylesheet_uri() );
 
-    wp_enqueue_script( 'pozhelaju-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
-	wp_enqueue_script( 'pozhelaju-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+    wp_enqueue_script( 'jquery' );
+    wp_enqueue_script( 'pozhelaju-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+    wp_enqueue_script( 'pozhelaju-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
     wp_enqueue_script( 'pozhelaju-bt_js', get_stylesheet_directory_uri() . '/js/bootstrap.js', array(), '20151215', true );
+    wp_enqueue_script( 'pozhelaju-theme_js', get_stylesheet_directory_uri() . '/js/theme.js', array(), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -189,5 +191,54 @@ function pagination() { // функция вывода пагинации
         'before_page_number' => '', // строка перед цифрой
         'after_page_number' => '' // строка после цифры
     ));
+}
+
+if (!class_exists('bootstrap_menu')) {
+    class bootstrap_menu extends Walker_Nav_Menu { // внутри вывод
+        private $open_submenu_on_hover; // параметр который будет определять раскрывать субменю при наведении или оставить по клику как в стандартном бутстрапе
+
+        function __construct($open_submenu_on_hover = true) { // в конструкторе
+            $this->open_submenu_on_hover = $open_submenu_on_hover; // запишем параметр раскрывания субменю
+        }
+
+        function start_lvl(&$output, $depth = 0, $args = array()) { // старт вывода подменюшек
+            $output .= "\n<ul class=\"dropdown-menu parent\">\n"; // ул с классом
+        }
+        function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) { // старт вывода элементов
+
+            $item_html = ''; // то что будет добавлять
+            parent::start_el($item_html, $item, $depth, $args); // вызываем стандартный метод родителя
+
+            // добавления атрибута для перевода меню
+
+            if ( $item->is_dropdown && $depth === 0 )
+            { // если элемент содержит подменю и это элемент первого уровня
+                $item_html = str_replace('<a', '<a aria-haspopup="true" class=" '.implode(' ',$item->classes).'" ', $item_html);
+                $item_html = str_replace('</a>', ' </a><i class="ddl-switch fa fa-angle-down"></i>', $item_html); // ну это стрелочка вниз
+                if (!$this->open_submenu_on_hover)   // если подменю не будет раскрывать при наведении надо добавить стандартные атрибуты бутстрапа для раскрытия по клику
+                    $item_html = str_replace('</a>', ' </a><i class="ddl-switch fa fa-angle-down"></i>', $item_html); // ну это стрелочка вниз
+
+            }
+
+
+            $output .= $item_html; // приклеиваем теперь
+            $output = str_replace(':&nbsp;', '', $output);
+        }
+        function display_element($element, &$children_elements, $max_depth, $depth = 0, $args, &$output) { // вывод элемента
+
+            $element->classes[] = 'vloz-'.$depth;
+            if ( $element->current ) $element->classes[] = 'active'; // если элемент активный надо добавить бутстрап класс для подсветки
+            $element->is_dropdown = !empty( $children_elements[$element->ID] ); // если у элемента подменю
+            if ( $element->is_dropdown ) { // если да
+                if ( $depth === 0 ) { // если li содержит субменю 1 уровня
+                    $element->classes[] = 'dropdown-submenu'; // то добавим этот класс
+                    if ($this->open_submenu_on_hover) $element->classes[] = '1-show-on-hover'; // если нужно показывать субменю по хуверу
+                } elseif ( $depth === 1 ) { // если li содержит субменю 2 уровня
+                    $element->classes[] = 'dropdown-submenu'; // то добавим этот класс, стандартный бутстрап не поддерживает подменю больше 2 уровня по этому эту ситуацию надо будет разрешать отдельно
+                }
+            }
+            parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output); // вызываем стандартный метод родителя
+        }
+    }
 }
 
