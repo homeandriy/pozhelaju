@@ -47,6 +47,10 @@
                 </div><!-- .site-branding -->
             </div>
         </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top d-lg-none">
+            <a href="#menu"><i class="fa fa-bars" aria-hidden="true"></i> Меню</a>
+            <a class="navbar-brand mx-auto" href="#">Navbar</a>
+        </nav>
         <?php wp_nav_menu( array(
             'theme_location'  => 'menu-1',
             'container'       => 'nav',
