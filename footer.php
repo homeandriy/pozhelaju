@@ -15,18 +15,42 @@
 
 	<footer id="colophon" class="site-footer">
 		<div class="site-info container">
-            <div class="row">
-                <a href="<?php echo esc_url( __( 'https://wordpress.org/', 'pozhelaju' ) ); ?>">
-                    <?php
-                    /* translators: %s: CMS name, i.e. WordPress. */
-                    printf( esc_html__( 'Proudly powered by %s', 'pozhelaju' ), 'WordPress' );
-                    ?>
-                </a>
-                <span class="sep"> | </span>
-                <?php
-                /* translators: 1: Theme name, 2: Theme author. */
-                printf( esc_html__( 'Theme: %1$s by %2$s.', 'pozhelaju' ), 'pozhelaju', '<a href="https://webbooks.com.ua/portfolio">Andriy Beznosko</a>' );
-                ?>
+            <div class="row shadow bg-white">
+                <!-- Upper Footer -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div id="upper-footer">
+                        <div class="row">
+                            <!-- Social Media -->
+                            <div class="col-lg-5 col-md-5 col-sm-5 social-media">
+                                <h4>Мы в соц сетях</h4>
+                                <ul>
+                                    <li><a href="http://vk.com/club66503088" target="_blank"><img src="https://pozhelaju.ru/wp-content/themes/your-clean-template%20%28RU%29/img/vk.png?x36082" alt="Мы в Контакте"></a></li>
+                                    <li><a href="http://ok.ru/group/52887373676797" target="_blank"><img src="https://pozhelaju.ru/wp-content/themes/your-clean-template%20%28RU%29/img/od.png?x36082" alt="Мы в Одноклассниках"></a></li>
+                                    <li><a href=""><img src="https://pozhelaju.ru/wp-content/themes/your-clean-template%20%28RU%29/img/facebook.png?x36082" alt="" target="_blank"></a></li>
+                                </ul>
+                            </div>
+                            <!-- /Social Media -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /Upper Footer -->
+                <!-- Main Footer -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div id="main-footer">
+                        © 2012-2018 Поздравления в стихах – Пожелания любимым. <br>
+                        <a href="https://pozhelaju.ru/feed">(RSS)</a>
+                        &nbsp;|&nbsp;При копировании материалов активная ссылка на этот сайт (не закрытая от индексации) обязательна | Соблюдайте закон об авторском праве
+                    </div>
+                </div>
+                <!-- /Main Footer -->
+                <!-- Lower Footer -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div id="lower-footer">
+                        <p class="copyright text-center">Copyright 2015-<?php echo date('Y')?> <a href="https://webbooks.com.ua/portfolio/" rel="nofollow" target="_blank">Andrii Beznosko</a>. All Rights Reserved.</p>
+                    </div>
+                    <!-- end of Top100 code -->
+                </div>
+                <!-- /Lower Footer -->
             </div>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->

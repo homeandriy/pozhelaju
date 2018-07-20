@@ -26,30 +26,34 @@
 
 	<header id="masthead" class="site-header">
         <div class="container">
-            <div class="col-lg-12">
-                <div class="site-branding text-center">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-4 pt-1">
+                    <a class="text-muted fz2" href="#menu"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-4 text-center">
                     <?php
                     the_custom_logo();
                     if ( is_front_page() && is_home() ) :
                         ?>
-                        <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="blog-header-logo text-dark"><?php bloginfo( 'name' ); ?></a>
                     <?php
                     else :
                         ?>
-                        <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="blog-header-logo text-dark site-title"><?php bloginfo( 'name' ); ?></a>
                     <?php
                     endif;
-                    $pozhelaju_description = get_bloginfo( 'description', 'display' );
-                    if ( $pozhelaju_description || is_customize_preview() ) :
-                        ?>
-                        <p class="site-description"><?php echo $pozhelaju_description; /* WPCS: xss ok. */ ?></p>
-                    <?php endif; ?>
-                </div><!-- .site-branding -->
+                    ?>
+                </div>
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                    <a class="text-muted" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+                    </a>
+                </div>
             </div>
         </div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top d-lg-none">
             <a href="#menu"><i class="fa fa-bars" aria-hidden="true"></i> Меню</a>
-            <a class="navbar-brand mx-auto" href="#">Navbar</a>
+            <a class="navbar-brand mx-auto" href="<?php echo esc_url( home_url( '/' ) );?>" rel="home"><?php bloginfo( 'name' ); ?></a>
         </nav>
         <?php wp_nav_menu( array(
             'theme_location'  => 'menu-1',
@@ -69,29 +73,8 @@
 
         ) ); ?>
 
-<!--        <nav id="menu">-->
-<!--            <ul>-->
-<!--                <li><a href="#">Home</a></li>-->
-<!--                <li><span>About us</span>-->
-<!--                    <ul>-->
-<!--                        <li><a href="#about/history">History</a></li>-->
-<!--                        <li><span>The team</span>-->
-<!--                            <ul>-->
-<!--                                <li><a href="#about/team/management">Management</a></li>-->
-<!--                                <li><a href="#about/team/sales">Sales</a></li>-->
-<!--                                <li><a href="#about/team/development">Development</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-<!--                        <li><a href="#about/address">Our address</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!--                <li><a href="#contact">Contact</a></li>-->
-<!---->
-<!--                <li class="Divider">Other demos</li>-->
-<!--                <li><a href="advanced.html">Advanced demo</a></li>-->
-<!--                <li><a href="onepage.html">One page demo</a></li>-->
-<!--            </ul>-->
-<!--        </nav>-->
 	</header><!-- #masthead -->
+
+
 
 	<div id="content" class="site-content">

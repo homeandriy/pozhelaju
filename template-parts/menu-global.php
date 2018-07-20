@@ -11,7 +11,7 @@
 <div class="hidden-xs sticky-menu"><!-- Categories -->
     <div class="row sidebar-box purple">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="sidebar-box-heading">
+            <div class="sidebar-box-heading purpule">
                 <h4>
                     <a href="#menu"><i class="fa fa-bars" aria-hidden="true"></i> Меню</a>
                 </h4>

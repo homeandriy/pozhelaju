@@ -178,14 +178,14 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 function pagination() { // функция вывода пагинации
     global $wp_query; // текущая выборка должна быть глобальной
     $big = 999999999; // число для замены
-    echo paginate_links(array( // вывод пагинации с опциями ниже
+    $html =  paginate_links(array( // вывод пагинации с опциями ниже
         'base' => str_replace($big,'%#%',esc_url(get_pagenum_link($big))), // что заменяем в формате ниже
         'format' => '?paged=%#%', // формат, %#% будет заменено
         'current' => max(1, get_query_var('paged')), // текущая страница, 1, если $_GET['page'] не определено
         'total' => $wp_query->max_num_pages, // общие кол-во страниц в пагинации
         'type' => 'list', // ссылки в ul
-        'prev_text'    => '<i class="fa fa-arrow-left"></i>&nbspНазад', // текст назад
-        'next_text'    => 'Еще &nbsp<i class="fa fa-arrow-right"></i>', // текст вперед
+        'prev_text'    => '<i class="fa fa-arrow-left"></i>', // текст назад
+        'next_text'    => '<i class="fa fa-arrow-right"></i>', // текст вперед
         'show_all'     => false, // не показывать ссылки на все страницы, иначе end_size и mid_size будут проигнорированны
         'end_size'     => 3, //  сколько страниц показать в начале и конце списка (12 ... 4 ... 89)
         'mid_size'     => 3, // сколько страниц показать вокруг текущей страницы (... 123 5 678 ...).
@@ -194,6 +194,11 @@ function pagination() { // функция вывода пагинации
         'before_page_number' => '', // строка перед цифрой
         'after_page_number' => '' // строка после цифры
     ));
+
+    $html =  '<nav aria-label="Page navigation example">'.str_replace( "<ul class='page-numbers'>", '<ul class="pagination justify-content-center" >', $html );
+    $html =  str_replace( "<li", '<li class="page-item"', $html );
+    $html =  str_replace( "<span", '<span class="page-link"', $html );
+    echo  str_replace( "<a", '<a class="page-link"', $html ).'</nav>';
 }
 
 if (!class_exists('bootstrap_menu')) {
