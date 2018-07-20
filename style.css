@@ -54,6 +54,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i&subset=cyrillic-ext');
+
 html {
 	line-height: 1.15; /* 1 */
 	-webkit-text-size-adjust: 100%; /* 2 */
@@ -395,8 +398,8 @@ input,
 select,
 optgroup,
 textarea {
-	color: #404040;
-	font-family: sans-serif;
+	color: #1f2228;
+	font-family:  'Open Sans', sans-serif;
 	font-size: 16px;
 	font-size: 1rem;
 	line-height: 1.5;
@@ -614,15 +617,15 @@ textarea {
 ## Links
 --------------------------------------------------------------*/
 a {
-	color: royalblue;
+	color: #3498DB;
 }
 
 a:visited {
-	color: purple;
+	color: #3498DB;
 }
 
 a:hover, a:focus, a:active {
-	color: midnightblue;
+	color: #1874b2;
 }
 
 a:focus {
