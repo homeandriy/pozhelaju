@@ -994,6 +994,9 @@ object {
 	height: 50px;
 	padding: 12px 20px 12px 40px;
 }
+.sidebar-box-heading > h4 > a {
+	color: #fff;
+}
 .sidebar-box-content {
 	position: relative;
 	background: #fff;

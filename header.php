@@ -47,6 +47,47 @@
                 </div><!-- .site-branding -->
             </div>
         </div>
+        <?php wp_nav_menu( array(
+            'theme_location'  => 'menu-1',
+            'container'       => 'nav',
+            'container_class' => '',
+            'container_id'    => 'menu',
+            'menu_class'      => 'menu',
+            'menu_id'         => '',
+            'echo'            => true,
+            'fallback_cb'     => 'wp_page_menu',
+            'before'          => '',
+            'after'           => '',
+            'link_before'     => '',
+            'link_after'      => '',
+            'items_wrap'      => '<ul id="%1$s" class=" %2$s">%3$s</ul>',
+            'depth'           => 0,
+
+        ) ); ?>
+
+<!--        <nav id="menu">-->
+<!--            <ul>-->
+<!--                <li><a href="#">Home</a></li>-->
+<!--                <li><span>About us</span>-->
+<!--                    <ul>-->
+<!--                        <li><a href="#about/history">History</a></li>-->
+<!--                        <li><span>The team</span>-->
+<!--                            <ul>-->
+<!--                                <li><a href="#about/team/management">Management</a></li>-->
+<!--                                <li><a href="#about/team/sales">Sales</a></li>-->
+<!--                                <li><a href="#about/team/development">Development</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                        <li><a href="#about/address">Our address</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li><a href="#contact">Contact</a></li>-->
+<!---->
+<!--                <li class="Divider">Other demos</li>-->
+<!--                <li><a href="advanced.html">Advanced demo</a></li>-->
+<!--                <li><a href="onepage.html">One page demo</a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

@@ -6,6 +6,7 @@
             $(this).children('.child').slideToggle('slow');
             $(this).find('span').toggle();
         });
+        $('nav#menu').mmenu();
     });
     $(window).load(function(){
 

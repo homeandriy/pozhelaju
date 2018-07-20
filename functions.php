@@ -130,12 +130,15 @@ add_action( 'widgets_init', 'pozhelaju_widgets_init' );
  */
 function pozhelaju_scripts() {
     wp_enqueue_style( 'pozhelaju-bt', get_stylesheet_directory_uri().'/css/bootstrap.css' );
+    wp_enqueue_style( 'mobile-menu', get_stylesheet_directory_uri().'/css/jquery.mmenu.css' );
+    wp_enqueue_style( 'awesome', get_stylesheet_directory_uri().'/css/font-awesome.min.css' );
     wp_enqueue_style( 'pozhelaju-style', get_stylesheet_uri() );
 
 
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'pozhelaju-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
     wp_enqueue_script( 'pozhelaju-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+    wp_enqueue_script( 'mobile_menu_js', get_stylesheet_directory_uri() . '/js/jquery.mmenu.js', array(), '20151215', true );
     wp_enqueue_script( 'pozhelaju-bt_js', get_stylesheet_directory_uri() . '/js/bootstrap.js', array(), '20151215', true );
     wp_enqueue_script( 'pozhelaju-theme_js', get_stylesheet_directory_uri() . '/js/theme.js', array(), '20151215', true );
 
@@ -214,9 +217,9 @@ if (!class_exists('bootstrap_menu')) {
             if ( $item->is_dropdown && $depth === 0 )
             { // если элемент содержит подменю и это элемент первого уровня
                 $item_html = str_replace('<a', '<a aria-haspopup="true" class=" '.implode(' ',$item->classes).'" ', $item_html);
-                $item_html = str_replace('</a>', ' </a><i class="ddl-switch fa fa-angle-down"></i>', $item_html); // ну это стрелочка вниз
+                $item_html = str_replace('</a>', ' </a>', $item_html); // ну это стрелочка вниз
                 if (!$this->open_submenu_on_hover)   // если подменю не будет раскрывать при наведении надо добавить стандартные атрибуты бутстрапа для раскрытия по клику
-                    $item_html = str_replace('</a>', ' </a><i class="ddl-switch fa fa-angle-down"></i>', $item_html); // ну это стрелочка вниз
+                    $item_html = str_replace('</a>', ' </a>', $item_html); // ну это стрелочка вниз
 
             }
 

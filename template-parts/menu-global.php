@@ -12,8 +12,9 @@
     <div class="row sidebar-box purple">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="sidebar-box-heading">
-                <i class="fa fa-arrow-circle-o-right"></i>
-                <h4>Меню</h4>
+                <h4>
+                    <a href="#menu"><i class="fa fa-bars" aria-hidden="true"></i> Меню</a>
+                </h4>
             </div>
             <div class="sidebar-box-content">
                 <div id="mn-wrapper">
