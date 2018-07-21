@@ -136,13 +136,14 @@ function pozhelaju_scripts() {
 
 
     wp_enqueue_script( 'jquery' );
+    wp_enqueue_script( 'pozhelaju-theme_js', get_stylesheet_directory_uri() . '/js/theme.js', array(), '20151215', true );
+    wp_enqueue_script( 'pozhelaju-bt_js', get_stylesheet_directory_uri() . '/js/bootstrap.js', array(), '20151215', true );
     wp_enqueue_script( 'pozhelaju-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
     wp_enqueue_script( 'pozhelaju-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
     wp_enqueue_script( 'mobile_menu_js', get_stylesheet_directory_uri() . '/js/jquery.mmenu.js', array(), '20151215', true );
-    wp_enqueue_script( 'pozhelaju-bt_js', get_stylesheet_directory_uri() . '/js/bootstrap.js', array(), '20151215', true );
-    wp_enqueue_script( 'pozhelaju-theme_js', get_stylesheet_directory_uri() . '/js/theme.js', array(), '20151215', true );
+    wp_enqueue_script( 'pozhelaju-clipboard', get_stylesheet_directory_uri() . '/js/clipboard.js', array(), '20151215', true );
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
@@ -249,4 +250,118 @@ if (!class_exists('bootstrap_menu')) {
         }
     }
 }
+
+add_action( 'wp_default_scripts', 'move_jquery_into_footer' );
+
+function move_jquery_into_footer( $wp_scripts ) {
+
+    if( is_admin() ) {
+        return;
+    }
+
+    $wp_scripts->add_data( 'jquery', 'group', 1 );
+    $wp_scripts->add_data( 'jquery-core', 'group', 1 );
+    $wp_scripts->add_data( 'jquery-migrate', 'group', 1 );
+}
+
+function get_category_tags($cats)
+{
+    global $wpdb;
+
+    if(is_array($cats))
+    {
+        $name_file_to_cats = implode('_',$cats).".cat";
+    }
+    else
+    {
+        $name_file_to_cats = "_".$cats.".cat";
+    }
+    $path_to_file = get_template_directory()."/cache_queries/".$name_file_to_cats;
+
+    if(false == file_exists($path_to_file))
+    {
+        $tagscat = $wpdb->get_results
+        ("
+			SELECT DISTINCT terms2.term_id as tag_id, terms2.name as tag_name, t2.count as posts_count, null as tag_link
+			FROM
+				wp_posts as p1
+				LEFT JOIN wp_term_relationships as r1 ON p1.ID = r1.object_ID
+				LEFT JOIN wp_term_taxonomy as t1 ON r1.term_taxonomy_id = t1.term_taxonomy_id
+				LEFT JOIN wp_terms as terms1 ON t1.term_id = terms1.term_id, 
+				wp_posts as p2
+				LEFT JOIN wp_term_relationships as r2 ON p2.ID = r2.object_ID
+				LEFT JOIN wp_term_taxonomy as t2 ON r2.term_taxonomy_id = t2.term_taxonomy_id
+				LEFT JOIN wp_terms as terms2 ON t2.term_id = terms2.term_id
+			WHERE
+				t1.taxonomy = 'category' AND p1.post_status = 'publish' AND terms1.term_id IN (". $cats .") AND
+				t2.taxonomy = 'post_tag' AND p2.post_status = 'publish'
+				AND p1.ID = p2.ID
+			ORDER by tag_name
+		");
+        $out = null;
+
+        foreach($tagscat as $tagcurrentcat)
+            $out .= '<li><a href="'. get_tag_link($tagcurrentcat->tag_id) .'" class="hvr-float"><i class="fa fa-arrow-circle-o-right"></i>&nbsp<strong>'. str_ireplace ('с юбилеем 40 лет', '',$tagcurrentcat->tag_name) .'</strong></a></li> ';
+        $front_end_html = rtrim($out, ', ');
+        file_put_contents($path_to_file, serialize($front_end_html));
+        return $front_end_html;
+    }
+    else
+    {
+        return unserialize(file_get_contents($path_to_file));
+    }
+
+}
+
+// Обрезка контента при копировании по ***
+add_filter('the_content', 'cut_content');
+function cut_content ($content)
+{
+    $cut = explode('***', $content);
+    if(!empty($cut) and count($cut) == '2')
+    {
+        $return_content = $cut['0'];
+        return $return_content.'***<div id="post_copy_'.get_the_ID().'" class="up-content"><p>'.$cut['1'].'</p>';
+    }
+    else
+    {
+        return '<span id="post_copy_'.get_the_ID().'" class="up-content">'.$content.'<span class="nonne-dsp"> - Скопировано с '.home_url().'<div class="close-block"></div></span></span>';
+    }
+};
+
+add_filter('xmlrpc_enabled', '__return_false');
+function remove_version() {
+    return '';
+}
+add_filter('the_generator', 'remove_version');
+
+// Отключаем сам REST API
+add_filter('rest_enabled', '__return_false');
+
+// Отключаем фильтры REST API
+remove_action( 'xmlrpc_rsd_apis',            'rest_output_rsd' );
+remove_action( 'wp_head',                    'rest_output_link_wp_head', 10, 0 );
+remove_action( 'template_redirect',          'rest_output_link_header', 11, 0 );
+remove_action( 'auth_cookie_malformed',      'rest_cookie_collect_status' );
+remove_action( 'auth_cookie_expired',        'rest_cookie_collect_status' );
+remove_action( 'auth_cookie_bad_username',   'rest_cookie_collect_status' );
+remove_action( 'auth_cookie_bad_hash',       'rest_cookie_collect_status' );
+remove_action( 'auth_cookie_valid',          'rest_cookie_collect_status' );
+remove_filter( 'rest_authentication_errors', 'rest_cookie_check_errors', 100 );
+
+// Отключаем события REST API
+remove_action( 'init',          'rest_api_init' );
+remove_action( 'rest_api_init', 'rest_api_default_filters', 10, 1 );
+remove_action( 'parse_request', 'rest_api_loaded' );
+
+// Отключаем Embeds связанные с REST API
+remove_action( 'rest_api_init',          'wp_oembed_register_route'              );
+remove_filter( 'rest_pre_serve_request', '_oembed_rest_pre_serve_request', 10, 4 );
+
+remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+// если собираетесь выводить вставки из других сайтов на своем, то закомментируйте след. строку.
+remove_action( 'wp_head', 'wp_oembed_add_host_js' );
+remove_action( 'wp_head', 'wlwmanifest_link' );
+remove_action( 'wp_head', 'rsd_link' );
+remove_action('wp_head', 'wp_shortlink_wp_head');
 

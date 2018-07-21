@@ -22,7 +22,7 @@
         the_content();
         ?>
         <a href="<?php echo get_the_permalink()?>" class="read-more pull-right">Далее&nbsp;<i class="fa fa-arrow-right"></i></a>
-        <button class="read-more pull-left copy" data-clipboard-target="#post_copy_9654"><i class="fa fa-clone"></i>&nbsp;Копировать</button>
+        <button class="read-more pull-left copy" data-clipboard-target="#post_copy_<?php echo get_the_ID()?>"><i class="fa fa-clone"></i>&nbsp;Копировать</button>
     </div><!-- .entry-content -->
 
     <?php if ( get_edit_post_link() ) : ?>

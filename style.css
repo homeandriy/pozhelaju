@@ -1264,3 +1264,6 @@ ul.dropdown-menu.parent {
 .read-more:visited {
 	color: #fff;
 }
+.nonne-dsp {
+	display: none;
+}
