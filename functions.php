@@ -365,3 +365,9 @@ remove_action( 'wp_head', 'wlwmanifest_link' );
 remove_action( 'wp_head', 'rsd_link' );
 remove_action('wp_head', 'wp_shortlink_wp_head');
 
+function get_rand_color ()
+{
+    $arr_color = array('primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark');
+    return $arr_color[rand(0, 6)];
+}
+

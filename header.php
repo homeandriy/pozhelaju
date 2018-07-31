@@ -10,11 +10,11 @@
  */
 
 ?>
-<!doctype html>
-<html <?php language_attributes(); ?>>
+<!doctype html >
+<html lang="ru">
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
 	<?php wp_head(); ?>
@@ -28,7 +28,17 @@
         <div class="container">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-4 pt-1">
-                    <a class="text-muted fz2" href="#menu"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                    <ul class="list-inline">
+                        <li class="list-inline-item top-item">
+                            <a href="vk.com"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                        </li>
+                        <li class="list-inline-item top-item " >
+                            <a href="vk.com"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        </li>
+                        <li class="list-inline-item top-item " >
+                            <a href="ok.ru"><i class="fa fa-odnoklassniki" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-4 text-center">
                     <?php

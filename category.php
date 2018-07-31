@@ -8,6 +8,12 @@
  */
 
 get_header();
+
+$get_child_cat_params = array(
+    'child_of'      => get_queried_object()->cat_ID,
+    'hide_empty' => false,
+);
+$terms = get_terms('category', $get_child_cat_params);
 ?>
 
     <div id="primary" class="content-area">
@@ -23,11 +29,30 @@ get_header();
                             }?>
                         </div>
                     </section>
-                    <section class="" >
-                        <div class="wrapper-post single-list-category bootom-border shadow" >
-                            <span class="badge badge-primary badge-pill"><a href="#" class="tags">метки</a></span>
-                        </div>
-                    </section>
+                    <?php if (sizeof($terms)>0) : ?>
+                        <section class="" >
+                            <div class="wrapper-post single-list-category bootom-border shadow" >
+                                <?php
+                                foreach ( $terms as $term )
+                                {
+                                    if($term->parent == get_queried_object()->cat_ID)
+                                    {
+                                        echo '<a href="'.esc_url( get_category_link( $term->term_id ) ).'" class=" tag-list btn btn-outline-'. get_rand_color() .'  " alt="'.$term->name.'"><strong>'.$term->name.'</strong></a>';
+
+                                    }
+                                }
+                                ?>
+                            </div>
+                        </section>
+                    <?php endif; ?>
+                    <?php if(!empty(category_description())):?>
+                        <section class="" >
+                            <div class="wrapper-post single-list-category bootom-border shadow" >
+                                <h2><?php echo get_queried_object()->name;?></h2>
+                                <?php echo category_description()?>
+                            </div>
+                        </section>
+                    <?php endif; ?>
                     <?php
                     while ( have_posts() ) :
                         the_post();

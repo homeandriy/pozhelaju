@@ -13,9 +13,9 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main container">
             <div class="row">
-                <div class="col-lg-3  d-none d-lg-block"><?php  get_template_part('template-parts/menu', 'global') ?></div>
+                <div class="col-lg-3  d-sm-none d-xs-none d-lg-block"><?php  get_template_part('template-parts/menu', 'global') ?></div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 main-content">
-                    <section class="" >
+                    <section class="" itemscope itemtype="http://schema.org/Article" >
                         <div class="wrapper-post single-list-category bootom-border shadow" >
                             <?php if(function_exists('bcn_display'))
                             {
@@ -24,7 +24,7 @@ get_header();
                         </div>
                     </section>
                     <section class="" itemscope itemtype="http://schema.org/Article" >
-
+                        <div class="wrapper-post  bootom-border" >
                             <?php
                             while ( have_posts() ) :
                                 the_post();
@@ -33,12 +33,17 @@ get_header();
 
                                 the_post_navigation();
 
+                                // If comments are open or we have at least one comment, load up the comment template.
+                                if ( comments_open() || get_comments_number() ) :
+                                    comments_template();
+                                endif;
+
                             endwhile; // End of the loop.
                             ?>
-
+                        </div>
                     </section>
                 </div>
-                <div class="col-lg-3  d-none d-lg-block"><?php  get_sidebar(); ?></div>
+                <div class="col-lg-3  d-sm-none d-xs-none d-lg-block"><?php  get_sidebar(); ?></div>
             </div>
 		</main><!-- #main -->
 	</div><!-- #primary -->

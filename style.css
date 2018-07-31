@@ -484,7 +484,7 @@ hr {
 }
 
 ul, ol {
-	margin: 0 0 1.5em 3em;
+	/*margin: 0 0 1.5em 3em;*/
 }
 
 ul {
@@ -1266,4 +1266,17 @@ ul.dropdown-menu.parent {
 }
 .nonne-dsp {
 	display: none;
+}
+.widget > ul {
+	padding-left: 0;
+}
+.tag-list {
+	margin: 5px;
+}
+.list-inline-item a {
+	font-size: 2em;
+	color: #f5791f;
+}
+.top-item {
+	padding-top: 5%;
 }
