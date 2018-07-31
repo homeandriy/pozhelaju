@@ -1280,3 +1280,8 @@ ul.dropdown-menu.parent {
 .top-item {
 	padding-top: 5%;
 }
+.menu_element {
+	color: #2ecc71;
+	font-size: 1.2em;
+	text-transform: uppercase;
+}

@@ -22,7 +22,7 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'pozhelaju' ); ?></a>
+	<a class="skip-link screen-reader-text " href="#content"><?php esc_html_e( 'Skip to content', 'pozhelaju' ); ?></a>
 
 	<header id="masthead" class="site-header">
         <div class="container">
@@ -62,7 +62,7 @@
             </div>
         </div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top d-lg-none">
-            <a href="#menu"><i class="fa fa-bars" aria-hidden="true"></i> Меню</a>
+            <a href="#menu" class="alert-link"><i class="fa fa-bars" aria-hidden="true"></i> Меню</a>
             <a class="navbar-brand mx-auto" href="<?php echo esc_url( home_url( '/' ) );?>" rel="home"><?php bloginfo( 'name' ); ?></a>
         </nav>
         <?php wp_nav_menu( array(

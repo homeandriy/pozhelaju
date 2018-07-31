@@ -26,6 +26,12 @@
                 'after'  => '</div>',
             ) );
             ?>
+            <div class="advance_meta">
+                <button class="read-more pull-left copy" data-clipboard-target="#post_copy_<?php echo get_the_ID()?>"><i class="fa fa-clone"></i>&nbsp;Копировать</button>
+            </div>
+            <div class="ad">
+                <?php get_template_part('advertising/ad-single_bottom_post')?>
+            </div>
         </div><!-- .entry-content -->
 
         <?php if ( get_edit_post_link() ) : ?>
