@@ -154,6 +154,8 @@ add_action( 'wp_enqueue_scripts', 'pozhelaju_scripts' );
  */
 require get_template_directory() . '/inc/custom-header.php';
 
+require get_template_directory() . '/inc/admin_metaboxes.php';
+
 /**
  * Custom template tags for this theme.
  */

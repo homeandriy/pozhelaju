@@ -55,7 +55,19 @@
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
+<div id="s-box" class="hide-search-box">
+    <button type="button" class="close" aria-label="Close" id="close-search">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div  class="search-box" >
+        <form action="">
+            <input type="text" name="s" id="search">
+            <input type="submit" value="Поиск" class="btn btn-info">
+        </form>
+        <div class="serch-result"></div>
+    </div>
 
+</div>
 <?php wp_footer(); ?>
 
 </body>
