@@ -1332,3 +1332,12 @@ ul.dropdown-menu.parent {
 .hide-search-box {
 	display: none;
 }
+.site-header {
+	background-color: #fff;
+	border-bottom: 2px solid #28a745;
+	margin-bottom: 15px;
+
+	-webkit-box-shadow: 0px 2px 33px -3px rgba(40,167,69,1);
+	-moz-box-shadow: 0px 2px 33px -3px rgba(40,167,69,1);
+	box-shadow: 0px 2px 33px -3px rgba(40,167,69,1);
+}
