@@ -366,6 +366,7 @@ remove_action( 'wp_head', 'wp_oembed_add_host_js' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
 remove_action( 'wp_head', 'rsd_link' );
 remove_action('wp_head', 'wp_shortlink_wp_head');
+remove_filter('term_description','wpautop');
 
 function get_rand_color ()
 {

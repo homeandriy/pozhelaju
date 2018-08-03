@@ -80,18 +80,20 @@ $status_list = get_term_meta( get_queried_object()->term_id, '__term_meta_text',
                             </div>
                         </section>
                     <?php endif; ?>
-                    <?php
-                    while ( have_posts() ) :
-                        the_post();
+                    <?php if($status_list != 'on') : ?>
+                        <?php
+                        while ( have_posts() ) :
+                            the_post();
 
-                        get_template_part( 'template-parts/content', 'category' );
+                            get_template_part( 'template-parts/content', 'category' );
 
 
-                    endwhile; // End of the loop.
+                        endwhile; // End of the loop.
 
-                    ?>
+                        ?>
 
-                    <?php pagination();?>
+                        <?php pagination();?>
+                    <?php endif; ?>
 
                 </div>
                 <div class="col-lg-3  d-none d-lg-block"><?php  get_sidebar(); ?></div>
