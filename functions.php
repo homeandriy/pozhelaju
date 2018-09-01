@@ -352,13 +352,13 @@ remove_action( 'auth_cookie_valid',          'rest_cookie_collect_status' );
 remove_filter( 'rest_authentication_errors', 'rest_cookie_check_errors', 100 );
 
 // Отключаем события REST API
-remove_action( 'init',          'rest_api_init' );
-remove_action( 'rest_api_init', 'rest_api_default_filters', 10, 1 );
-remove_action( 'parse_request', 'rest_api_loaded' );
+// remove_action( 'init',          'rest_api_init' );
+// remove_action( 'rest_api_init', 'rest_api_default_filters', 10, 1 );
+// remove_action( 'parse_request', 'rest_api_loaded' );
 
 // Отключаем Embeds связанные с REST API
-remove_action( 'rest_api_init',          'wp_oembed_register_route'              );
-remove_filter( 'rest_pre_serve_request', '_oembed_rest_pre_serve_request', 10, 4 );
+// remove_action( 'rest_api_init',          'wp_oembed_register_route'              );
+// remove_filter( 'rest_pre_serve_request', '_oembed_rest_pre_serve_request', 10, 4 );
 
 remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 // если собираетесь выводить вставки из других сайтов на своем, то закомментируйте след. строку.
