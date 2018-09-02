@@ -12,7 +12,7 @@
     <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 </header><!-- .entry-header -->
 <div class="wrapper-post single-list-category bootom-border shadow" >
-    <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class('single-content'); ?>>
 
 
         <?php pozhelaju_post_thumbnail(); ?>
@@ -27,34 +27,11 @@
             ) );
             ?>
             <div class="advance_meta">
-                <button class="read-more pull-left copy" data-clipboard-target="#post_copy_<?php echo get_the_ID()?>"><i class="fa fa-clone"></i>&nbsp;Копировать</button>
+                <button class="read-more copy" data-clipboard-target="#post_copy_<?php echo get_the_ID()?>"><i class="fa fa-clone"></i>&nbsp;Копировать</button>
             </div>
             <div class="ad">
                 <?php get_template_part('advertising/ad-single_bottom_post') //розширена реклама?>
             </div>
-        </div><!-- .entry-content -->
-
-        <?php if ( get_edit_post_link() ) : ?>
-            <footer class="entry-footer">
-                <?php
-                edit_post_link(
-                    sprintf(
-                        wp_kses(
-                        /* translators: %s: Name of current post. Only visible to screen readers */
-                            __( 'Edit <span class="screen-reader-text">%s</span>', 'pozhelaju' ),
-                            array(
-                                'span' => array(
-                                    'class' => array(),
-                                ),
-                            )
-                        ),
-                        get_the_title()
-                    ),
-                    '<span class="edit-link">',
-                    '</span>'
-                );
-                ?>
-            </footer><!-- .entry-footer -->
-        <?php endif; ?>
+        </div><!-- .entry-content -->        
     </article><!-- #post-<?php the_ID(); ?> -->
 </div>

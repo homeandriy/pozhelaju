@@ -323,7 +323,7 @@ function cut_content ($content)
     if(!empty($cut) and count($cut) == '2')
     {
         $return_content = $cut['0'];
-        return $return_content.'***<div id="post_copy_'.get_the_ID().'" class="up-content text-center"><p>'.$cut['1'].'</p>';
+        return $return_content.'***<div id="post_copy_'.get_the_ID().'" class="up-content text-center"><p>'.$cut['1'].'</p></div>';
     }
     else
     {

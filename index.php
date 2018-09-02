@@ -11,18 +11,15 @@
  *
  * @package pozhelaju
  */
-
 get_header();
 ?>
-
-	<div id="primary" class="content-area">
+    <div id="primary" class="content-area">
 		<main id="main" class="site-main container">
             <div class="row">
                 <div class="col-lg-3  d-none d-lg-block"><?php  get_template_part('template-parts/menu', 'global') ?></div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 main-content">
                     <?php
                     if ( have_posts() ) :
-
                         if ( is_home() && ! is_front_page() ) :
                             ?>
                             <header>
@@ -30,11 +27,9 @@ get_header();
                             </header>
                             <?php
                         endif;
-
                         /* Start the Loop */
                         while ( have_posts() ) :
                             the_post();
-
                             /*
                              * Include the Post-Type-specific template for the content.
                              * If you want to override this in a child theme, then include a file

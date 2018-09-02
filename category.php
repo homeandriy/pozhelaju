@@ -47,29 +47,30 @@ $status_list = get_term_meta( get_queried_object()->term_id, '__term_meta_text',
                         </section>
                     <?php elseif(sizeof($terms)>0 and $status_list == 'on') : ?>
                         <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card text-white bg-dark" >
+                                    <div class="card-header">Выберите подкатегорию</div>
                             <?php
                             foreach ( $terms as $term )
                             {
                                 if($term->parent == get_queried_object()->cat_ID)
                                 {
                                     ?>
-                                    <div class="col-sm-12">
-                                        <div class="card text-white bg-<?php echo get_rand_color() ?>" >
-                                            <div class="card-header">
-                                                <?php echo $term->name;?>
-                                            </div>
-                                            <div class="card-body">
-                                                <p class="card-text"><?php echo category_description($term->term_id )?></p>
-                                                <a href="<?php echo esc_url( get_category_link( $term->term_id ) )?>" class=" text-white card-link btn btn-outline-<?php echo get_rand_color() ?>">Открыть раздел</a>
-
-                                            </div>
-                                        </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            <a href="<?php echo esc_url( get_category_link( $term->term_id ) )?>" class="link"><?php echo $term->name;?></a>
+                                            <?php echo category_description($term->term_id )?>
+                                        </p>
+                                        <a href="<?php echo esc_url( get_category_link( $term->term_id ) )?>" class=" text-white card-link btn btn-outline-<?php echo get_rand_color() ?>">Открыть раздел</a>
                                     </div>
-
+                                    <hr>
                                     <?php
                                 }
                             }
                             ?>
+
+                                </div>
+                            </div>
                         </div>
                     <?php endif; ?>
                     <?php if(!empty(category_description())):?>
@@ -86,7 +87,6 @@ $status_list = get_term_meta( get_queried_object()->term_id, '__term_meta_text',
                             the_post();
 
                             get_template_part( 'template-parts/content', 'category' );
-
 
                         endwhile; // End of the loop.
 

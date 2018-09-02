@@ -13,7 +13,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="sidebar-box-heading purpule">
                 <h4>
-                    <a href="#menu"><i class="fa fa-bars" aria-hidden="true"></i> Меню</a>
+                    <a href="#menu" class="is_note_decoration"><i class="fa fa-bars" aria-hidden="true"></i> Меню</a>
                 </h4>
             </div>
             <div class="sidebar-box-content">
