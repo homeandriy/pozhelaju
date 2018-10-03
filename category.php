@@ -30,6 +30,19 @@ $status_list = get_term_meta( get_queried_object()->term_id, '__term_meta_text',
                             }?>
                         </div>
                     </section>
+                    <section class="" >
+                        <div class="wrapper-post single-list-category bootom-border shadow" >
+                            reclama
+                        </div>
+                    </section>
+                     <?php if(!empty(category_description())):?>
+                        <section class="" >
+                            <div class="wrapper-post single-list-category bootom-border shadow" >
+                                <h2><?php echo get_queried_object()->name;?></h2>
+                                <?php echo category_description()?>
+                            </div>
+                        </section>
+                    <?php endif; ?>
                     <?php if (sizeof($terms)>0 and $status_list != 'on') : ?>
                         <section class="" >
                             <div class="wrapper-post single-list-category bootom-border shadow" >
@@ -59,6 +72,7 @@ $status_list = get_term_meta( get_queried_object()->term_id, '__term_meta_text',
                                     <div class="card-body">
                                         <p class="card-text">
                                             <a href="<?php echo esc_url( get_category_link( $term->term_id ) )?>" class="link"><?php echo $term->name;?></a>
+                                            <br>
                                             <?php echo category_description($term->term_id )?>
                                         </p>
                                         <a href="<?php echo esc_url( get_category_link( $term->term_id ) )?>" class=" text-white card-link btn btn-outline-<?php echo get_rand_color() ?>">Открыть раздел</a>
@@ -73,14 +87,7 @@ $status_list = get_term_meta( get_queried_object()->term_id, '__term_meta_text',
                             </div>
                         </div>
                     <?php endif; ?>
-                    <?php if(!empty(category_description())):?>
-                        <section class="" >
-                            <div class="wrapper-post single-list-category bootom-border shadow" >
-                                <h2><?php echo get_queried_object()->name;?></h2>
-                                <?php echo category_description()?>
-                            </div>
-                        </section>
-                    <?php endif; ?>
+                   
                     <?php if($status_list != 'on') : ?>
                         <?php
                         while ( have_posts() ) :

@@ -20,17 +20,20 @@
 
     var clipboard = new ClipboardJS('.copy');
 
-    clipboard.on('success', function(e) {
-        console.info('Action:', e.action);
-        console.info('Text:', e.text);
-        console.info('Trigger:', e.trigger);
-
-        e.clearSelection();
+    clipboard.on('success', function(event) {
+        event.trigger.innerHTML = '<i class="fa fa-check-square-o" aria-hidden="true"></i> Скопировано';
+        event.trigger.style.backgroundColor = '#3498DB';
+        window.setTimeout(function() {
+            event.trigger.innerHTML = '<i class="fa fa-clipboard" aria-hidden="true"></i>  Скопировать';
+            event.trigger.style.backgroundColor = "#34495e";
+        }, 2000);
     });
 
-    clipboard.on('error', function(e) {
-        console.error('Action:', e.action);
-        console.error('Trigger:', e.trigger);
+    clipboard.on('error', function(event) {
+        event.trigger.innerHTML = '<span>Ваш браузер не поддерживает автоматическое копирование, нажмите Ctrl+C для копирования </span>';
+       window.setTimeout(function() {
+           event.trigger.textContent = 'Copy';
+       }, 2000);
     });
 
     $('#open-search').on('click', function (event) {

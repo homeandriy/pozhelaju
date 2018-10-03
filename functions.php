@@ -238,7 +238,7 @@ if (!class_exists('bootstrap_menu')) {
         function display_element($element, &$children_elements, $max_depth, $depth = 0, $args, &$output) { // вывод элемента
 
             $element->classes[] = 'vloz-'.$depth;
-            if ( $element->current ) $element->classes[] = 'active'; // если элемент активный надо добавить бутстрап класс для подсветки
+            if ( isset($element->current) and $element->current ) $element->classes[] = 'active'; // если элемент активный надо добавить бутстрап класс для подсветки
             $element->is_dropdown = !empty( $children_elements[$element->ID] ); // если у элемента подменю
             if ( $element->is_dropdown ) { // если да
                 if ( $depth === 0 ) { // если li содержит субменю 1 уровня
@@ -323,13 +323,19 @@ function cut_content ($content)
     if(!empty($cut) and count($cut) == '2')
     {
         $return_content = $cut['0'];
-        return $return_content.'***<div id="post_copy_'.get_the_ID().'" class="up-content text-center"><p>'.$cut['1'].'</p></div>';
+        return $return_content.'***<div id="post_copy_'.get_the_ID().'" class="up-content text-center"><p>'.str_replace_once('<br />', '', $cut['1']).'</p></div>';
     }
     else
     {
         return '<span id="post_copy_'.get_the_ID().'" class="up-content">'.$content.'<span class="nonne-dsp"> - Скопировано с '.home_url().'<div class="close-block"></div></span></span>';
     }
 };
+
+function str_replace_once($search, $replace, $text) 
+{ 
+   $pos = stripos($text, $search); 
+   return $pos!==false ? substr_replace($text, $replace, $pos, strlen($search)) : $text; 
+} 
 
 add_filter('xmlrpc_enabled', '__return_false');
 function remove_version() {

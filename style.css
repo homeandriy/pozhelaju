@@ -857,7 +857,8 @@ a:hover, a:active {
 .page-content,
 .entry-content,
 .entry-summary {
-	margin: 1.5em 0 0;
+	/*margin: 1.5em 0 0;*/
+	margin: 5px;
 }
 
 .page-links {
@@ -1045,7 +1046,7 @@ object {
 	color: #fff;
 	text-transform: uppercase;
 	overflow: hidden;
-	height: 50px;
+	min-height: 50px;
 	padding: 12px 20px 12px 40px;
 }
 
@@ -1338,12 +1339,13 @@ ul.dropdown-menu.parent {
 }
 .site-header {
 	background-color: #fff;
-	border-bottom: 2px solid #28a745;
+	border-bottom: 2px solid #34495e;
 	margin-bottom: 15px;
 
-	-webkit-box-shadow: 0px 2px 33px -3px rgba(40,167,69,1);
+	/*-webkit-box-shadow: 0px 2px 33px -3px rgba(40,167,69,1);
 	-moz-box-shadow: 0px 2px 33px -3px rgba(40,167,69,1);
 	box-shadow: 0px 2px 33px -3px rgba(40,167,69,1);
+	*/
 }
 .is_note_decoration:hover {
 	text-decoration: none;	
@@ -1359,4 +1361,11 @@ ul.dropdown-menu.parent {
 }
 .single-content > div {
     text-align: center;
+}
+.widget>form {
+	padding: 5px;
+}
+.entry-content>p:first-child {
+	padding-bottom: 0;
+	margin-bottom: 0;
 }
