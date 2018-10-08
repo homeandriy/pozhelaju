@@ -109,9 +109,9 @@ function pozhelaju_widgets_init() {
 		'id'            => 'sidebar-1',
 		'description'   => esc_html__( 'Add widgets here.', 'pozhelaju' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
+		'after_widget'  => '</div></section>',
 		'before_title'  => '<h4 class="widget-title left-widget">',
-		'after_title'   => '</h4>',
+		'after_title'   => '</h4><div class="wrap_w">',
 	) );
     register_sidebar( array(
         'name'          => 'Menu',
@@ -378,5 +378,46 @@ function get_rand_color ()
 {
     $arr_color = array('primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark');
     return $arr_color[rand(0, 6)];
+}
+
+function get_ordered_cat () {
+    // $categories = get_the_category();
+    $categories = get_the_category();
+    // Assemble a tree of category relationships
+    // Also re-key the category array for easier
+    // reference
+    $category_tree = array();
+    $keyed_categories = array();
+    foreach( (array)$categories as $c ) {
+        $category_tree[$c->cat_ID] = $c->category_parent;
+        $keyed_categories[$c->cat_ID] = $c;
+    }
+    // Now loop through and create a tiered list of
+    // categories
+    $tiered_categories = array();
+    $tier = 0;
+    // This is the recursive bit
+    while ( !empty( $category_tree ) ) {
+        $cats_to_unset = array();
+        foreach( (array)$category_tree as $cat_id => $cat_parent ) {
+            if ( !in_array( $cat_parent, array_keys( $category_tree ) ) ) {
+                $tiered_categories[$tier][] = $cat_id;
+                $cats_to_unset[] = $cat_id;
+            }
+        }
+        foreach( $cats_to_unset as $ctu ) {
+            unset( $category_tree[$ctu] );
+        }
+        $tier++;
+    }
+    // Walk through the tiers to order the cat objects properly
+    $ordered_categories = array();
+    foreach( (array)$tiered_categories as $tier ) {
+        foreach( (array)$tier as $tcat ) {
+            $ordered_categories[] = $keyed_categories[$tcat];
+        }
+    }
+    // Now you can loop over them and do whatever you want
+    return array_reverse((array)$ordered_categories);
 }
 

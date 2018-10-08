@@ -1369,3 +1369,20 @@ ul.dropdown-menu.parent {
 	padding-bottom: 0;
 	margin-bottom: 0;
 }
+.wrap_w {
+	padding: 10px 5px 5px 10px;
+}
+.wrap_w ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+.wrap_w ul li:hover {
+	color : #222;
+}
+.holiday-title {
+	color:	#222;
+}
+.modal-backdrop {
+	display: none;
+}

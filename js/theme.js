@@ -61,4 +61,16 @@
     $('.widget-title').each(function () {
         $(this).addClass('bg-'+return_rend_color ())
     })
+
+
+
+
+    $('.list_all_prazdniks>a').click( function(e) {
+
+            e.preventDefault();
+
+            $('#list_holidays').modal('show');
+            
+
+        });
 })(jQuery);

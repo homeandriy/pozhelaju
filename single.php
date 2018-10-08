@@ -15,6 +15,8 @@ get_header();
             <div class="row">
                 <div class="col-lg-3  d-none d-lg-block"><?php  get_template_part('template-parts/menu', 'global') ?></div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 main-content">
+                	<!-- Button trigger modal -->
+
                     <section>
                         <div class="wrapper-post single-list-category bootom-border shadow" >
                             <?php if(function_exists('bcn_display'))
