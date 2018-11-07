@@ -421,3 +421,23 @@ function get_ordered_cat () {
     return array_reverse((array)$ordered_categories);
 }
 
+add_action('wp_head', function () { echo '<script type="text/javascript"> var ajaxurl = \''. admin_url('admin-ajax.php') .'\';</script>'; });
+
+add_action( 'wp_ajax_all_holidays', 'all_holidays_callback' );
+add_action( 'wp_ajax_nopriv_all_holidays', 'all_holidays_callback' );
+
+
+function all_holidays_callback () {
+
+    if ( wp_doing_ajax() ) {
+        print_r( $_REQUEST );
+        echo "<ul>";
+        echo wp_list_categories(array(
+            'jhide_empty' => 1,
+            'orderby'     => 'name'
+        ));
+        echo "</ul>";
+    }
+    wp_die();
+}
+

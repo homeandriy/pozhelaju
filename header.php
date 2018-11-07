@@ -25,7 +25,7 @@
 	<a class="skip-link screen-reader-text " href="#content"><?php esc_html_e( 'Skip to content', 'pozhelaju' ); ?></a>
 
 	<header id="masthead" class="site-header">
-        <div class="container">
+        <div class="container d-none d-lg-block">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-2 pt-1">
                     <ul class="list-inline">
@@ -64,6 +64,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top d-lg-none">
             <a href="#menu" class="alert-link"><i class="fa fa-bars" aria-hidden="true"></i> Меню</a>
             <a class="navbar-brand mx-auto" href="<?php echo esc_url( home_url( '/' ) );?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+            <a href="#left_panel" class="alert-link" id="right_panel"><i class="fa fa-cog" aria-hidden="true"></i></a>
         </nav>
         <?php wp_nav_menu( array(
             'theme_location'  => 'menu-1',

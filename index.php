@@ -18,10 +18,10 @@ get_header();
             <div class="row">
                 <div class="col-lg-3  d-none d-lg-block"><?php  get_template_part('template-parts/menu', 'global') ?></div>
                 <div class="col-lg-6 col-sm-12 col-xs-12 main-content" style="    background-color: #fff;
-    border: 1px solid #ccc;
-    -webkit-box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);
-    -moz-box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);
-    box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);">
+																				    border: 1px solid #ccc;
+																				    -webkit-box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);
+																				    -moz-box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);
+																				    box-shadow: 0 4px 11px 0 rgba(50,50,50,0.36);">
                     <?php
                     if (is_home()) 
                     {
