@@ -82,12 +82,38 @@
 					// $('#misha_button').text('Загрузка, 5 сек...');
 				},
 				success: function( res ) {
-					$('#all_holidays').append( res );
+					var list_cat = JSON.parse(res);
+					console.log(list_cat);
+					var formatHTML = new String();
+
+					list_cat.map( function (element) {
+
+						var name = element.name;
+
+						if( element.name.indexOf('Поздравления на') != -1 ) {
+							name = element.name.replace( 'Поздравления на', '');
+						}
+
+						if( element.name.indexOf('Поздравление') != -1 ) {
+							name = element.name.replace( 'Поздравление', '');
+						}
+
+						if( element.name.indexOf('Поздравления с') != -1 ) {
+							name = element.name.replace( 'Поздравления с', 'С');
+						}
+
+						return formatHTML+= '<a href="'+ element.url +'" class="">'+ name + '</a><br/>';
+					});
+					$('#all_holidays').append( formatHTML );
 					// console.log( res );
 				}
 			});
 			
 			$('#list_holidays').modal('show');
+			$('#list_holidays').css({
+				'background-color': 'rgba(2,2,2,.8)',
+				
+			});
 			
 
 		});
