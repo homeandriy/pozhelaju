@@ -121,18 +121,49 @@
 	var open = false;
 
 	var show_right_panel = function ( this_open ) {
-		open = !this_open;
+		
+
+		var html_content = $('#secondary').html();
+		var panel = $('#r_mob_menu');
 
 		if( this_open  == false ) {
-			var html_content = $('#secondary').html();
+			
+			panel.css({
+				width   : 0
+			});
+			setTimeout(function(){
+				panel.html('');
+			}, 800);
 			
 		}
+		else {
+			panel.append( html_content );
+			panel.css({
+				width   : window.screen.availWidth
+			});
+		}
+
+		
 	}
 
 	
 	$(document).on('click', '#right_panel', function(event) {
 		event.preventDefault();
 		/* Act on the event */
-		show_right_panel ( open ? true : false );
+		// var open = true;
+		console.log(open);
+		show_right_panel ( open ? false : true );
+		open = !open;
 	});
+
+	if($('#bottom_panel').length > 0 )
+	{
+		setTimeout(function () {
+			$('#bottom_panel').css({
+				height : '40px'
+			});
+		},2000);
+		
+	}
+
 })(jQuery);

@@ -16,7 +16,7 @@ $get_child_cat_params = array(
 $terms = get_terms('category', $get_child_cat_params);
 $status_list = get_term_meta( get_queried_object()->term_id, '__term_meta_text', true );
 ?>
-
+    <div id="bottom_panel"></div>
     <div id="primary" class="content-area">
         <main id="main" class="site-main container">
             <div class="row">

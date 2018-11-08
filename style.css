@@ -1386,3 +1386,26 @@ ul.dropdown-menu.parent {
 .modal-backdrop {
 	display: none;
 }
+#r_mob_menu {
+	display: block;
+	width: 0;
+	position: fixed;
+	right: 0;
+	top: 56px;
+	bottom: 0;
+	z-index: 9;
+    background-color: rgb(255, 255, 255);
+	transition: width 0.8s ease;
+}
+#bottom_panel {
+	position: fixed;
+	height: 0;
+	left:0;
+	right: 0;
+	bottom: 0;
+	display: block; 
+	background-color: #9b59b6;
+	z-index: 8;
+	transition: height .8s ease;
+}
+
