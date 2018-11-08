@@ -13,25 +13,33 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main container">
             <div class="row">
-                <div class="col-sm-3"><?php  get_sidebar('Menu'); ?></div>
-                <div class="col-sm-6">
-                    <?php
-                    while ( have_posts() ) :
-                        the_post();
+                <div class="col-lg-3  d-none d-lg-block"><?php  get_template_part('template-parts/menu', 'global') ?></div>
+                <div class="col-lg-6 col-sm-12 col-xs-12 main-content">
+                	<!-- Button trigger modal -->
 
-                        get_template_part( 'template-parts/content', get_post_type() );
+                    <section>
+                        <div class="wrapper-post single-list-category bootom-border shadow" >
+                            <?php if(function_exists('bcn_display'))
+                            {
+                                bcn_display();
+                            }?>
+                        </div>
+                    </section>
+                    <section <?php post_class()?> itemscope itemtype="http://schema.org/Article" >
+                        <div class="wrapper-post" >
+                            <?php
+                            while ( have_posts() ) :
+                                the_post();
 
-                        the_post_navigation();
-
-                        // If comments are open or we have at least one comment, load up the comment template.
-                        if ( comments_open() || get_comments_number() ) :
-                            comments_template();
-                        endif;
-
-                    endwhile; // End of the loop.
-                    ?>
+                                get_template_part( 'template-parts/content', get_post_type() );
+                            endwhile; // End of the loop.
+                            ?>
+                        </div>
+                    </section>
+                    <?php get_template_part('template-parts/single', 'tags')?>
+                    <?php get_template_part('template-parts/single', 'related')?>
                 </div>
-                <div class="col-sm-3"><?php  get_sidebar('Sidebar'); ?></div>
+                <div class="col-lg-3  d-none d-lg-block"><?php  get_sidebar(); ?></div>
             </div>
 		</main><!-- #main -->
 	</div><!-- #primary -->

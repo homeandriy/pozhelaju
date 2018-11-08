@@ -10,17 +10,18 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package pozhelaju
+ * Template Name: Главная
  */
 
 get_header();
 ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
             <main id="main" class="site-main container">
                 <div class="row">
                     <div class="col-lg-3  d-none d-lg-block"><?php  get_template_part('template-parts/menu', 'global') ?></div>
-                    <div class="col-lg-6 col-sm-12 col-xs-12 main-content">
+                    <div class="col-lg-9 col-sm-12 col-xs-12 main-content">
                         <section class="" itemscope itemtype="http://schema.org/Article" >
                             <div class="wrapper-post single-list-category bootom-border shadow" >
                                 <?php if(function_exists('bcn_display'))
@@ -47,12 +48,10 @@ get_header();
                             </div>
                         </section>
                     </div>
-                    <div class="col-lg-3  d-none d-lg-block"><?php  get_sidebar(); ?></div>
                 </div>
             </main>
-		</main><!-- #main -->
-	</div><!-- #primary -->
+        </main><!-- #main -->
+    </div><!-- #primary -->
 
 <?php
-get_sidebar();
 get_footer();
