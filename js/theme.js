@@ -29,15 +29,34 @@
 
 		$('#open-search').on('click', function (event) {
 			event.preventDefault();
+			if($(this).hasClass('is_open_s'))
+			{
+				$(this).removeClass('is_open_s');
+				
+				$('#search_input').css({
+					'height' : '0px',
+					'top'    : $('#masthead').outerHeight()+ 5 + 'px',
+					'opacity'    : 0
+				});
 
-			$('#search_input').css({
-				top          : $('#masthead').outerHeight()+ 5 + 'px',
-				'min-height' : '120px',
-				'visibility' : 'visible'
-			});
-			// console.log($(this));
-			// $('#s-box').removeClass('hide-search-box');
-			// $('#s-box').addClass('search-wrap');
+				setTimeout( function() {
+					$('#search_input').css({'visibility' : 'hidden'});
+				},800);
+			}
+			else {
+				$(this).addClass('is_open_s');
+
+				$('#search_input').css({
+					top          : $('#masthead').outerHeight()+ 5 + 'px',
+					'height'     : '100px',
+					'visibility' : 'visible',
+					'opacity'    : 1
+				});
+
+				$('#search').focus();
+			}
+			
+
 		})
 		$('#close-search').on('click', function (event) {
 			event.preventDefault();
@@ -171,6 +190,43 @@
 			});
 		},2000);
 		
+	}
+
+	var time_i = +new Date;
+	$('#search').on('keyup', function(event) {
+		event.preventDefault();		
+		if($(this).val().length >= 3) {
+
+			if( +new Date - time_i >= 500 ) {
+				// console.log( +new Date - time_i );
+
+				search( $(this).val() );
+				time_i = +new Date;
+			}
+			else {
+				time_i = +new Date;
+			}
+		}
+	});
+
+	function search ( $what_search ) {
+		$.ajax({
+				url: window.ajaxurl,
+				type: 'POST',
+				data: {
+					action : 'search',
+					word   : $what_search
+				},
+				beforeSend: function() {
+					// $('#misha_button').text('Загрузка, 5 сек...');
+				},
+				success: function( res ) {
+					var list_cat = JSON.parse(res);
+					console.log(list_cat);
+					
+					// console.log( res );
+				}
+			});
 	}
 
 })(jQuery);

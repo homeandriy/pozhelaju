@@ -1419,14 +1419,30 @@ ul.dropdown-menu.parent {
 	visibility: hidden;
 	position: absolute;
 	width: 100%;
-	min-height: 0;
+	height: 0;
 	background-color: #fff;
 	border-bottom: 2px solid #34495e;
-	bottom: 0;   
+	bottom: 0;
+	top: 0;
+	opacity: 0; 
     z-index: 9999;
-    transition: min-height 0.9s ease-in;
+    transition: height 0.9s ease-in;
+    transition: top 0.9s ease-in;
+    transition: opacity 0.9s ease-in;
     
 }
+
+#search_input form {
+	text-align: center;
+    padding-top: 12px;
+}
+
+#search_input form  input {
+    height: 70px;
+    width: 80%;
+    font-size: 34px;
+}
+
 #masthead>.container {
 	position: relative;
 }

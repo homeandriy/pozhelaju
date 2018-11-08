@@ -452,3 +452,16 @@ function all_holidays_callback () {
 	wp_die();
 }
 
+add_action( 'wp_ajax_search', 'search_in_site' );
+add_action( 'wp_ajax_nopriv_search', 'search_in_site' );
+
+
+function search_in_site () {
+	if ( wp_doing_ajax() ) {
+		$word = esc_sql($_REQUEST['word']);
+
+		echo json_encode($word, JSON_UNESCAPED_UNICODE);
+	}
+	wp_die();
+}
+
