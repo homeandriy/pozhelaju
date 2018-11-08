@@ -1396,6 +1396,7 @@ ul.dropdown-menu.parent {
 	z-index: 9;
     background-color: rgb(255, 255, 255);
 	transition: width 0.8s ease;
+	overflow-y: auto;
 }
 #bottom_panel {
 	position: fixed;
@@ -1409,3 +1410,23 @@ ul.dropdown-menu.parent {
 	transition: height .8s ease;
 }
 
+.wrap-logo {
+    padding: 0 15px 0 45px;
+    margin-top: -8px;
+}
+
+#search_input {
+	visibility: hidden;
+	position: absolute;
+	width: 100%;
+	min-height: 0;
+	background-color: #fff;
+	border-bottom: 2px solid #34495e;
+	bottom: 0;   
+    z-index: 9999;
+    transition: min-height 0.9s ease-in;
+    
+}
+#masthead>.container {
+	position: relative;
+}

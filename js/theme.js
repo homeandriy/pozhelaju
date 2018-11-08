@@ -29,15 +29,21 @@
 
 		$('#open-search').on('click', function (event) {
 			event.preventDefault();
+
+			$('#search_input').css({
+				top          : $('#masthead').outerHeight()+ 5 + 'px',
+				'min-height' : '120px',
+				'visibility' : 'visible'
+			});
 			// console.log($(this));
-			$('#s-box').removeClass('hide-search-box');
-			$('#s-box').addClass('search-wrap');
+			// $('#s-box').removeClass('hide-search-box');
+			// $('#s-box').addClass('search-wrap');
 		})
 		$('#close-search').on('click', function (event) {
 			event.preventDefault();
 			// console.log($(this));
-			$('#s-box').addClass('hide-search-box');
-			$('#s-box').removeClass('search-wrap');
+			// $('#s-box').addClass('hide-search-box');
+			// $('#s-box').removeClass('search-wrap');
 		})
 
 
@@ -139,7 +145,8 @@
 		else {
 			panel.append( html_content );
 			panel.css({
-				width   : window.screen.availWidth
+				width   : window.screen.availWidth,
+				top     : +$('#mob_navbar').outerHeight()+ 5 + 'px'
 			});
 		}
 
