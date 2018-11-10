@@ -4,7 +4,7 @@ Theme URI: http://underscores.me/
 Author: Andriy Beznosko
 Author URI: https://webbooks.com.ua/portfolio
 Description: Git hub theme width update
-Version: 1.0.4
+Version: 1.0.5
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: pozhelaju
@@ -1463,4 +1463,13 @@ ul.dropdown-menu.parent {
 .list-group-horizontal .list-group-item:last-child {
 	border-top-right-radius:4px;
 	border-bottom-left-radius:0;
+}
+ul.list-holidays>li>a {
+    display: block;
+    padding: 8px 35px 8px 20px;
+    color: #1f2228;
+    transition: background-color 0.9s ease-in;
+}
+ul.list-holidays>li>a:hover {
+    background-color: #F7F836;
 }
