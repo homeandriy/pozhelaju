@@ -66,7 +66,6 @@
 
 	  	$(document).mouseup(function (e)
         {
-        	console.log(e.target);
 		  	if (!container.is(e.target) && container.has(e.target).length === 0 && container.hasClass('is_open_s')) // ... nor a descendant of the container
 		  	{
 		  		$('#open-search').removeClass('is_open_s');

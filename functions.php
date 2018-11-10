@@ -473,7 +473,7 @@ function create_fb_markup() {
 		echo '<meta property="og:url" content="'.get_the_permalink($post->ID).'" />';
 		echo '<meta property="og:type" content="article" />';
 		echo '<meta property="og:title" content="'.get_the_title($post->ID).'" />';
-		echo '<meta property="og:description" content="'.get_the_content($post->ID).'" />';
+		echo '<meta property="og:description" content="'.apply_filters('the_content', get_post_field('post_content', $post->ID)).'" />';
 		echo '<meta property="og:image" content="'.get_stylesheet_directory_uri() .'/img/logo.png" />';
 	}
 }

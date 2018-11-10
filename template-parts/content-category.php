@@ -29,7 +29,16 @@
         <div class="clear"></div>
         <div class="list-group-inline list-group-horizontal">
             <a href="#" class="list-group-item read-more pull-left copy" data-clipboard-target="#post_copy_<?php echo get_the_ID()?>"><i class="fa fa-clone"></i>&nbsp;Копировать</a>
-            <a href="#" class="list-group-item" style="padding: 0"><img width="70" src="<?php echo get_stylesheet_directory_uri(); ?>/img/share/viber.png"></a>
+            <a href="#" class="list-group-item" style="padding: 0" id="viber-share-<?php get_the_ID()?>">
+
+                <img width="70" src="<?php echo get_stylesheet_directory_uri(); ?>/img/share/viber.png" >
+                <script>
+                    var buttonID = "viber-share-<?php get_the_ID()?>";
+                    var text = "<?php get_the_title(get_the_ID())?>";
+                    document.getElementById(buttonID)
+                        .setAttribute('href', "https://3p3x.adj.st/?adjust_t=u783g1_kw9yml&adjust_fallback=https%3A%2F%2Fwww.viber.com%2F%3Futm_source%3DPartner%26utm_medium%3DSharebutton%26utm_campaign%3DDefualt&adjust_campaign=Sharebutton&adjust_deeplink=" + encodeURIComponent("viber://forward?text=" + encodeURIComponent(text + " " + window.location.href)));
+                </script>
+            </a>
             <a href="http://facebook.com/sharer.php?u=<?php echo get_the_permalink(); ?>" class="list-group-item" style="padding: 0">
                 <img width="70" src="<?php echo get_stylesheet_directory_uri(); ?>/img/share/facebook.png">
                 <div class="fb-share-button" 
