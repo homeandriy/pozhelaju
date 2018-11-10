@@ -1453,7 +1453,7 @@ ul.dropdown-menu.parent {
 }
 .list-group-horizontal .list-group-item {
 	margin-bottom: 0;
-	margin-left:-4px;
+	/*margin-left:-4px;*/
 	margin-right: 0;
 }
 .list-group-horizontal .list-group-item:first-child {
@@ -1472,4 +1472,7 @@ ul.list-holidays>li>a {
 }
 ul.list-holidays>li>a:hover {
     background-color: #F7F836;
+}
+.copy:hover {
+	color: #ffffff
 }

@@ -18,6 +18,7 @@
     <?php pozhelaju_post_thumbnail(); ?>
 
     <div class="entry-content">
+        <!-- тут код для виїзду блока соціального  -->
         <?php
         the_content();
         ?>

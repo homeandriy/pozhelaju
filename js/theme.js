@@ -9,14 +9,21 @@
 		$('nav#menu').mmenu();
 
 
+		$('.copy').on('click', function(event) {
+			/* Act on the event */
+			event.preventDefault();
+		});
+
 		var clipboard = new ClipboardJS('.copy');
 
 		clipboard.on('success', function(event) {
 			event.trigger.innerHTML = '<i class="fa fa-check-square-o" aria-hidden="true"></i> Скопировано';
 			event.trigger.style.backgroundColor = '#3498DB';
+			event.trigger.style.color = "#ffffff";
 			window.setTimeout(function() {
 				event.trigger.innerHTML = '<i class="fa fa-clipboard" aria-hidden="true"></i>  Скопировать';
 				event.trigger.style.backgroundColor = "#34495e";
+				event.trigger.style.color = "#ffffff";
 			}, 2000);
 		});
 
