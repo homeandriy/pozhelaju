@@ -22,7 +22,24 @@
         the_content();
         ?>
         <a href="<?php echo get_the_permalink()?>" class="read-more pull-right">Далее&nbsp;<i class="fa fa-arrow-right"></i></a>
-        <button class="read-more pull-left copy" data-clipboard-target="#post_copy_<?php echo get_the_ID()?>"><i class="fa fa-clone"></i>&nbsp;Копировать</button>
+        <!-- <button class="read-more pull-left copy" data-clipboard-target="#post_copy_<?php //echo get_the_ID()?>"><i class="fa fa-clone"></i>&nbsp;Копировать</button> -->
+
+        <br>
+        <br>
+        <div class="clear"></div>
+        <div class="list-group-inline list-group-horizontal">
+            <a href="#" class="list-group-item read-more pull-left copy" data-clipboard-target="#post_copy_<?php echo get_the_ID()?>"><i class="fa fa-clone"></i>&nbsp;Копировать</a>
+            <a href="#" class="list-group-item" style="padding: 0"><img width="70" src="<?php echo get_stylesheet_directory_uri(); ?>/img/share/viber.png"></a>
+            <a href="http://facebook.com/sharer.php?u=<?php echo get_the_permalink(); ?>" class="list-group-item" style="padding: 0">
+                <img width="70" src="<?php echo get_stylesheet_directory_uri(); ?>/img/share/facebook.png">
+                <div class="fb-share-button" 
+                    data-href="<?php echo get_the_permalink(); ?>" 
+                    data-layout="button_count">
+                  </div>
+            </a>
+            <a href="#" class="list-group-item" style="padding: 0"><img width="70" src="<?php echo get_stylesheet_directory_uri(); ?>/img/share/skype.png"></a>
+            <a href="#" class="list-group-item" style="padding: 0"><img width="70" src="<?php echo get_stylesheet_directory_uri(); ?>/img/share/telegram.png"></a>
+        </div>
     </div><!-- .entry-content -->
 
     <?php if ( get_edit_post_link() ) : ?>

@@ -32,7 +32,9 @@
 			if($(this).hasClass('is_open_s'))
 			{
 				$(this).removeClass('is_open_s');
-				
+				$('#search_input').removeClass('is_open_s');
+
+
 				$('#search_input').css({
 					'height' : '0px',
 					'top'    : $('#masthead').outerHeight()+ 5 + 'px',
@@ -45,6 +47,7 @@
 			}
 			else {
 				$(this).addClass('is_open_s');
+				$('#search_input').addClass('is_open_s');
 
 				$('#search_input').css({
 					top          : $('#masthead').outerHeight()+ 5 + 'px',
@@ -57,7 +60,26 @@
 			}
 			
 
-		})
+		});
+
+		var container = $("#search_input"); // YOUR CONTAINER SELECTOR
+
+	  	$(document).mouseup(function (e)
+        {
+        	console.log(e.target);
+		  	if (!container.is(e.target) && container.has(e.target).length === 0 && container.hasClass('is_open_s')) // ... nor a descendant of the container
+		  	{
+		  		$('#open-search').removeClass('is_open_s');
+				$('#search_input').removeClass('is_open_s');
+
+			    $('#search_input').css({
+					'height' : '0px',
+					'top'    : $('#masthead').outerHeight()+ 5 + 'px',
+					'opacity'    : 0
+				});
+		  	}
+	  	});
+
 		$('#close-search').on('click', function (event) {
 			event.preventDefault();
 			// console.log($(this));
@@ -191,6 +213,7 @@
 		},2000);
 		
 	}
+
 
 	var time_i = +new Date;
 	$('#search').on('keyup', function(event) {

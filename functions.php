@@ -465,3 +465,16 @@ function search_in_site () {
 	wp_die();
 }
 
+add_action('wp_head', 'create_fb_markup');
+
+function create_fb_markup() {
+	if(is_single()) {
+		global $post;
+		echo '<meta property="og:url" content="'.get_the_permalink($post->ID).'" />';
+		echo '<meta property="og:type" content="article" />';
+		echo '<meta property="og:title" content="'.get_the_title($post->ID).'" />';
+		echo '<meta property="og:description" content="'.get_the_content($post->ID).'" />';
+		echo '<meta property="og:image" content="'.get_stylesheet_directory_uri() .'/img/logo.png" />';
+	}
+}
+
