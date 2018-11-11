@@ -1,8 +1,6 @@
 <?php 
-
 global $post;
  ?>
-
  <section>
 	<div class="wrapper-post" >
 		<div class="wrapper-post single-list-category bootom-border shadow">
@@ -21,10 +19,6 @@ global $post;
 					echo "<hr>";
 				}
 				wp_reset_postdata();
-				?>
-
-
-				<?php
 			}
 
 
@@ -67,10 +61,6 @@ global $post;
 					}
 				}
 			}
-			// echo "<pre>";
-			// print_r($category);
-			// echo "</pre>";
-
 			?>
 		</div>
 	</div>

@@ -29,6 +29,7 @@
 				<form>
 					<input type="search" id="search" name="search" placeholder="Введите что искать">
 				</form>
+				<div id="ressearch"></div>
 			</div>
 			<div class="row flex-nowrap justify-content-between align-items-center">
 				<div class="col-2 pt-1">

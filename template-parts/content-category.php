@@ -17,7 +17,7 @@
 
     <?php pozhelaju_post_thumbnail(); ?>
 
-    <div class="entry-content" data-attrid="<?php echo get_the_ID(); ?>" style="position: relative;">
+    <div class="entry-content" data-attrid="<?php echo get_the_ID(); ?>">
         <!-- тут код для виїзду блока соціального  -->
         <?php if( !wp_is_mobile() ): ?>
             <div class="shqre-block square-<?php echo get_the_ID(); ?>" >

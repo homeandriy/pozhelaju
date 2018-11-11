@@ -457,10 +457,20 @@ add_action( 'wp_ajax_nopriv_search', 'search_in_site' );
 
 
 function search_in_site () {
+
 	if ( wp_doing_ajax() ) {
+
+		// include search file
+		require get_template_directory() . '/inc/search.php';
+
 		$word = esc_sql($_REQUEST['word']);
 
-		echo json_encode($word, JSON_UNESCAPED_UNICODE);
+		echo json_encode(
+			array(
+				'input' => $word,
+				'htmlCreateCategory' => search_category($word),
+				'htmlCreatePost' => search_post($word),
+				), JSON_UNESCAPED_UNICODE);
 	}
 	wp_die();
 }

@@ -45,7 +45,8 @@
 				$('#search_input').css({
 					'height' : '0px',
 					'top'    : $('#masthead').outerHeight()+ 5 + 'px',
-					'opacity'    : 0
+					'opacity'    : 0,
+					'visibility' : 'hidden'
 				});
 
 				setTimeout( function() {
@@ -58,7 +59,7 @@
 
 				$('#search_input').css({
 					top          : $('#masthead').outerHeight()+ 5 + 'px',
-					'height'     : '100px',
+					'height'     : 'max-content',
 					'visibility' : 'visible',
 					'opacity'    : 1
 				});
@@ -81,7 +82,8 @@
 			    $('#search_input').css({
 					'height' : '0px',
 					'top'    : $('#masthead').outerHeight()+ 5 + 'px',
-					'opacity'    : 0
+					'opacity'    : 0,
+				    'visibility' : 'hidden'
 				});
 		  	}
 	  	});
@@ -251,12 +253,39 @@
 				},
 				success: function( res ) {
 					var list_cat = JSON.parse(res);
+					$('#ressearch').html(render_category_list(list_cat.htmlCreateCategory));
 					console.log(list_cat);
 					
 					// console.log( res );
 				}
 			});
 	}
+
+	function render_category_list ( array_list ) {
+
+		var startHTML = '<table class="table">\
+  						<thead>\
+					    	<tr>\
+						      <th scope="col">#</th>\
+						      <th scope="col">Категория</th>\
+						      <th scope="col">Родители</th>\
+						    </tr>\
+						  </thead> <tbody>';
+	  	var mapRes = '';
+		if( Array.isArray( array_list ) ) {
+			array_list.map( function ( element , index ) {
+				var linkToRes = element['linksParent'] === undefined ? '': element['linksParent']; 
+				return mapRes += ' <tr>\
+									      <th scope="row">'+ index +'</th>\
+									      <td><a href="'+ element['url'] +'">'+element['name']+'</a></td> \
+									      <td>'+ linkToRes +'</td>\
+									    </tr>';
+			} );
+		}
+
+		startHTML += mapRes + '</tbody></table>';
+		return startHTML;
+	} 
 
 	$('.entry-content').hover(function() {
 		console.log($(this));
