@@ -258,4 +258,17 @@
 			});
 	}
 
+	$('.entry-content').hover(function() {
+		console.log($(this));
+		/* Stuff to do when the mouse enters the element */
+		$('.square-' + $(this).data('attrid')).css({
+			opacity: 1
+		});
+	}, function() {
+		/* Stuff to do when the mouse leaves the element */
+		$('.square-' + $(this).data('attrid')).css({
+			opacity: 0
+		});
+	});
+
 })(jQuery);
