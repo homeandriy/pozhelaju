@@ -253,7 +253,14 @@
 				},
 				success: function( res ) {
 					var list_cat = JSON.parse(res);
-					$('#ressearch').html(render_category_list(list_cat.htmlCreateCategory));
+
+					$('#ressearch').html('');
+
+					console.log(list_cat.htmlCreateCategory.no_result);
+					if( list_cat.htmlCreateCategory.no_result === undefined ) {
+						$('#ressearch').html(render_category_list(list_cat.htmlCreateCategory));
+					}
+					
 					console.log(list_cat);
 					
 					// console.log( res );
