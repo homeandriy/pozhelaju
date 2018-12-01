@@ -129,19 +129,21 @@ add_action( 'widgets_init', 'pozhelaju_widgets_init' );
  * Enqueue scripts and styles.
  */
 function pozhelaju_scripts() {
-	wp_enqueue_style( 'pozhelaju-bt', get_stylesheet_directory_uri().'/css/bootstrap.css' );
-	wp_enqueue_style( 'mobile-menu', get_stylesheet_directory_uri().'/css/jquery.mmenu.css' );
-	wp_enqueue_style( 'awesome', get_stylesheet_directory_uri().'/css/font-awesome.min.css' );
+	
+	$ver = '1.01';
+	wp_enqueue_style( 'pozhelaju-bt', get_stylesheet_directory_uri().'/css/bootstrap.css'array(), $ver );
+	wp_enqueue_style( 'mobile-menu', get_stylesheet_directory_uri().'/css/jquery.mmenu.css'array(), $ver );
+	wp_enqueue_style( 'awesome', get_stylesheet_directory_uri().'/css/font-awesome.min.css'array(), $ver );
 	wp_enqueue_style( 'pozhelaju-style', get_stylesheet_uri() );
 
 
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'pozhelaju-clipboard', get_stylesheet_directory_uri() . '/js/clipboard.min.js', array(), '20151215', true );
-	wp_enqueue_script( 'pozhelaju-theme_js', get_stylesheet_directory_uri() . '/js/theme.js', array(), '20151215', true );
-	wp_enqueue_script( 'pozhelaju-bt_js', get_stylesheet_directory_uri() . '/js/bootstrap.js', array(), '20151215', true );
-	wp_enqueue_script( 'pozhelaju-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
-	wp_enqueue_script( 'pozhelaju-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
-	wp_enqueue_script( 'mobile_menu_js', get_stylesheet_directory_uri() . '/js/jquery.mmenu.js', array(), '20151215', true );
+	wp_enqueue_script( 'pozhelaju-clipboard', get_stylesheet_directory_uri() . '/js/clipboard.min.js', array(), $ver, true );
+	wp_enqueue_script( 'pozhelaju-theme_js', get_stylesheet_directory_uri() . '/js/theme.js', array(), $ver, true );
+	wp_enqueue_script( 'pozhelaju-bt_js', get_stylesheet_directory_uri() . '/js/bootstrap.js', array(), $ver, true );
+	wp_enqueue_script( 'pozhelaju-navigation', get_template_directory_uri() . '/js/navigation.js', array(), $ver, true );
+	wp_enqueue_script( 'pozhelaju-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), $ver, true );
+	wp_enqueue_script( 'mobile_menu_js', get_stylesheet_directory_uri() . '/js/jquery.mmenu.js', array(), $ver, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -431,22 +433,24 @@ function all_holidays_callback () {
 
 	if ( wp_doing_ajax() ) {
 
-		$list_cat = get_categories(array(
-			'jhide_empty' => 1,
-			'orderby'     => 'name',
-			'order'       => 'ASC',
+		global $wpdb;
+		$holiday_table = $wpdb->prefix . 'termmeta';
+		$table_terms =  $wpdb->prefix."terms";
 
-		));
-		$return_array = []; 
-		foreach ($list_cat as $cat) {
-			if( $cat->parent < 1 ) {
-				$cat->url = get_term_link($cat);
-				$return_array[] = $cat;
-			}
+		// Так як там усі дати за 2018, тоді треба це врахувати
+		$start_date = date ("2018-m-01");
+		
+		$tomorrowDATE = date('2018-m-t');
 
-		}
+		$get_all_holidays_by_range = $wpdb->get_results("SELECT * FROM $holiday_table as termmeta 
+														JOIN $table_terms as tax ON  termmeta.term_id = tax.term_id 
+														WHERE termmeta.meta_key = '__day_of_holiday' AND termmeta.meta_value BETWEEN '".$start_date."' AND '". $tomorrowDATE."'");
 
-		echo json_encode($return_array, JSON_UNESCAPED_UNICODE);
+		echo json_encode(
+					array(	'status'=> 'success',
+							'result'=> $get_all_holidays_by_range
+					), JSON_UNESCAPED_UNICODE
+				);
 		
 	}
 	wp_die();

@@ -98,11 +98,6 @@
 
 
 	});
-	$(window).load(function(){
-
-	});
-
-
 
 
 	$('.widget > ul').addClass('list-group-flush');
@@ -141,25 +136,13 @@
 					console.log(list_cat);
 					var formatHTML = new String();
 
-					list_cat.map( function (element) {
+		
+					currMonth= new Date().getMonth();
+					currYear= new Date().getYear();
+					++currMonth;
 
-						var name = element.name;
-
-						if( element.name.indexOf('Поздравления на') != -1 ) {
-							name = element.name.replace( 'Поздравления на', '');
-						}
-
-						if( element.name.indexOf('Поздравление') != -1 ) {
-							name = element.name.replace( 'Поздравление', '');
-						}
-
-						if( element.name.indexOf('Поздравления с') != -1 ) {
-							name = element.name.replace( 'Поздравления с', 'С');
-						}
-
-						return formatHTML+= '<a href="'+ element.url +'" class="">'+ name + '</a><br/>';
-					});
-					$('#all_holidays').append( formatHTML );
+					console.log(currMonth);
+					$('#all_holidays').append( createCalendar("all_holidays", currYear, currMonth, list_cat.result) );
 					// console.log( res );
 				}
 			});
@@ -172,6 +155,71 @@
 			
 
 		});
+	function createCalendar(id, year, month, objday) {
+		var elem = document.getElementById(id);
+
+		var mon = month - 1; // месяцы в JS идут от 0 до 11, а не от 1 до 12
+		var d = new Date(year, mon);
+
+		var table = '<div class="table-responsive"><table class="table table-hover table-bordered"><tr><th>пн</th><th>вт</th><th>ср</th><th>чт</th><th>пт</th><th>сб</th><th>вс</th></tr><tr>';
+
+		// заполнить первый ряд от понедельника
+		// и до дня, с которого начинается месяц
+		// * * * | 1  2  3  4
+		for (var i = 0; i < getDay(d); i++) {
+			table += '<td></td>';
+		}
+
+		// ячейки календаря с датами
+		while (d.getMonth() == mon) {
+			table += '<td><div class="current-date">' + d.getDate() + '</div><br>'+searchCurrentDateHolidays(d.getDay(), objday)+'</td>';
+
+			if (getDay(d) % 7 == 6) { // вс, последний день - перевод строки
+				table += '</tr><tr>';
+			}
+
+			d.setDate(d.getDate() + 1);
+		}
+
+		// добить таблицу пустыми ячейками, если нужно
+		if (getDay(d) != 0) {
+			for (var i = getDay(d); i < 7; i++) {
+				table += '<td></td>';
+			}
+		}
+
+		// закрыть таблицу
+		table += '</tr></table></div>';
+
+		// только одно присваивание innerHTML
+		elem.innerHTML = table;
+	}
+
+	function searchCurrentDateHolidays ( day, objectWhere ) {
+		var htmlBuild = '';
+		var count = 1;
+		objectWhere.map( function(element){
+			holidaydate = new Date(element.meta_value).getDay();
+
+			// console.log(holidaydate);
+			if(holidaydate === day) {
+				htmlBuild += '<a href="/category/'+element.slug+'">'+count+'. '+element.name+'</a><br><hr>';
+				count++;
+			}
+		});
+
+		return htmlBuild;
+	}
+
+	function getDay(date) { // получить номер дня недели, от 0(пн) до 6(вс)
+		var day = date.getDay();
+		if (day == 0) day = 7;
+			return day - 1;
+	}
+
+
+
+	   
 
 	var open = false;
 

@@ -44,7 +44,14 @@ function insert_holidays_function() {
 	global $wpdb;
 	$holiday_table = $wpdb->prefix . 'termmeta';
 
-	$get_all_holidays_by_range = $wpdb->get_results("SELECT * FROM $holiday_table WHERE meta_key = '__day_of_holiday' AND meta_value BETWEEN (NOW() - INTERVAL 1 DAY) AND  (NOW() + INTERVAL 7 DAY)");
+	// Так як там усі дати за 2018, тоді треба це врахувати
+	$start_date = date ("2018-m-d");
+
+	$intermediatedate = new DateTime($start_date);
+	$intermediatedate->modify('+7 day');
+	$tomorrowDATE = $intermediatedate->format('Y-m-d');
+
+	$get_all_holidays_by_range = $wpdb->get_results("SELECT * FROM $holiday_table WHERE meta_key = '__day_of_holiday' AND meta_value BETWEEN '".$start_date."' AND '". $tomorrowDATE."'" );
 
 	$html = '<ul class="list-holidays">';
 	if( $get_all_holidays_by_range and count($get_all_holidays_by_range ) >= 1) {
