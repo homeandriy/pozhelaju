@@ -62,18 +62,23 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">Календарь празников за год</h5>
+        <input type="date" name="date_holiday">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" >
-        <h3>Смотреть все празники</h3>
+        <div class="checker text-center ">
+            <div id="move-mounth-to-end" class="float-left button-to-change-mounth"> << </div>
+            - <span id="curr_mounth" class="text-center" ><?php echo date(F); ?></span> -
+            <div id="move-mounth-to-start" class="float-right button-to-change-mounth"> >> </div>
+        </div>
         <div id="all_holidays"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+        
       </div>
     </div>
   </div>

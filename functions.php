@@ -130,10 +130,10 @@ add_action( 'widgets_init', 'pozhelaju_widgets_init' );
  */
 function pozhelaju_scripts() {
 	
-	$ver = '1.01';
-	wp_enqueue_style( 'pozhelaju-bt', get_stylesheet_directory_uri().'/css/bootstrap.css'array(), $ver );
-	wp_enqueue_style( 'mobile-menu', get_stylesheet_directory_uri().'/css/jquery.mmenu.css'array(), $ver );
-	wp_enqueue_style( 'awesome', get_stylesheet_directory_uri().'/css/font-awesome.min.css'array(), $ver );
+	$ver = '1.02';
+	wp_enqueue_style( 'pozhelaju-bt', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), $ver );
+	wp_enqueue_style( 'mobile-menu', get_stylesheet_directory_uri().'/css/jquery.mmenu.css', array(), $ver );
+	wp_enqueue_style( 'awesome', get_stylesheet_directory_uri().'/css/font-awesome.min.css', array(), $ver );
 	wp_enqueue_style( 'pozhelaju-style', get_stylesheet_uri() );
 
 
@@ -437,18 +437,24 @@ function all_holidays_callback () {
 		$holiday_table = $wpdb->prefix . 'termmeta';
 		$table_terms =  $wpdb->prefix."terms";
 
+		!empty($_REQUEST['param']['mounth']) ? $mounth = $_REQUEST['param']['mounth'] : $mounth = date('m');
+
 		// Так як там усі дати за 2018, тоді треба це врахувати
-		$start_date = date ("2018-m-01");
+		$start_date = date ('2018-'.str_pad($mounth,2,'0', STR_PAD_LEFT).'-01');
 		
-		$tomorrowDATE = date('2018-m-t');
+		$tomorrowDATE = date('2018-'.str_pad($mounth,2,'0', STR_PAD_LEFT).'-t');
 
 		$get_all_holidays_by_range = $wpdb->get_results("SELECT * FROM $holiday_table as termmeta 
 														JOIN $table_terms as tax ON  termmeta.term_id = tax.term_id 
-														WHERE termmeta.meta_key = '__day_of_holiday' AND termmeta.meta_value BETWEEN '".$start_date."' AND '". $tomorrowDATE."'");
+														WHERE termmeta.meta_key = '__day_of_holiday' AND termmeta.meta_value 
+														BETWEEN '".$start_date."' AND '". $tomorrowDATE."'");
 
 		echo json_encode(
 					array(	'status'=> 'success',
-							'result'=> $get_all_holidays_by_range
+							'result'=> $get_all_holidays_by_range,
+							// 'query' => $wpdb->last_query,
+							// 'input' => $_REQUEST,
+							// 'mounth'=> $mounth
 					), JSON_UNESCAPED_UNICODE
 				);
 		

@@ -116,45 +116,91 @@
 		$(this).addClass('bg-'+return_rend_color ())
 	})
 
+	var mo = function () {
+			var m = new Date().getMonth();
+			return ++m
+		}
+	var calendar = {
+		mounth : mo(),
+		yearYoSearch : 2018,
+		currentYear : currYear= new Date().getFullYear(),
+		mounthName : {
+					'1' : 'Январь',
+					'2' : 'Февраль',
+					'3' : 'Март',
+					'4' : 'Апрель',
+					'5' : 'Май',
+					'6' : 'Июнь',
+					'7' : 'Июль',
+					'8' : 'Август',
+					'9' : 'Сентябрь',
+					'10' : 'Октябрь',
+					'11' : 'Ноябрь',
+					'12' : 'Декабрь',
 
+					}
+	}
 
 	$('.list_all_prazdniks>a').click( function(e) {
 
 			e.preventDefault();
+			ajaxCalendar()
 
-			$.ajax({
-				url: window.ajaxurl,
-				type: 'POST',
-				data: {
-					action : 'all_holidays',
-				},
-				beforeSend: function() {
-					// $('#misha_button').text('Загрузка, 5 сек...');
-				},
-				success: function( res ) {
-					var list_cat = JSON.parse(res);
-					console.log(list_cat);
-					var formatHTML = new String();
+	});
+
+	$('#move-mounth-to-end').click( function(e) {
+
+			// e.preventDefault();
+			--calendar.mounth < 1 ? calendar.mounth = 12 : calendar.mounth;
+			
+			ajaxCalendar()
+
+	});
+
+	$('#move-mounth-to-start').click( function(e) {
+
+			// e.preventDefault();
+			++calendar.mounth >= 13 ? calendar.mounth = 1: calendar.mounth;
+			ajaxCalendar()
+
+	});
+
+
+	function ajaxCalendar () {
+		$.ajax({
+			url: window.ajaxurl,
+			type: 'POST',
+			data: {
+				action : 'all_holidays',
+				param :  calendar
+			},
+			beforeSend: function() {
+				// $('#misha_button').text('Загрузка, 5 сек...');
+			},
+			success: function( res ) {
+				var list_cat = JSON.parse(res);
+				console.log(list_cat);
+				var formatHTML = new String();
 
 		
-					currMonth= new Date().getMonth();
-					currYear= new Date().getYear();
-					++currMonth;
-
-					console.log(currMonth);
-					$('#all_holidays').append( createCalendar("all_holidays", currYear, currMonth, list_cat.result) );
-					// console.log( res );
-				}
-			});
-			
-			$('#list_holidays').modal('show');
-			$('#list_holidays').css({
-				'background-color': 'rgba(2,2,2,.8)',
 				
-			});
-			
+				
+				// ++calendar.mounth;
 
+				console.log(calendar.currentYear);
+				$('#curr_mounth').text(calendar.mounthName[calendar.mounth]);
+				createCalendar("all_holidays", calendar.currentYear, calendar.mounth, list_cat.result);
+				// console.log( res );
+			}
 		});
+		
+		$('#list_holidays').modal('show');
+		$('#list_holidays').css({
+			'background-color': 'rgba(2,2,2,.8)',
+			
+		});
+		
+	}
 	function createCalendar(id, year, month, objday) {
 		var elem = document.getElementById(id);
 
@@ -172,7 +218,8 @@
 
 		// ячейки календаря с датами
 		while (d.getMonth() == mon) {
-			table += '<td><div class="current-date">' + d.getDate() + '</div><br>'+searchCurrentDateHolidays(d.getDay(), objday)+'</td>';
+			console.log(d);
+			table += '<td><div class="current-date">' + d.getDate() + '</div><br>'+searchCurrentDateHolidays(d.getDate(), objday)+'</td>';
 
 			if (getDay(d) % 7 == 6) { // вс, последний день - перевод строки
 				table += '</tr><tr>';
@@ -192,6 +239,7 @@
 		table += '</tr></table></div>';
 
 		// только одно присваивание innerHTML
+		elem.innerHTML = '';
 		elem.innerHTML = table;
 	}
 
@@ -199,11 +247,12 @@
 		var htmlBuild = '';
 		var count = 1;
 		objectWhere.map( function(element){
-			holidaydate = new Date(element.meta_value).getDay();
+			holidaydate = new Date(element.meta_value).getDate();
 
-			// console.log(holidaydate);
+			console.log(holidaydate);
 			if(holidaydate === day) {
-				htmlBuild += '<a href="/category/'+element.slug+'">'+count+'. '+element.name+'</a><br><hr>';
+				var str = element.name.replace(/(Поздравления|Поздравление)/gm, '');
+				htmlBuild += '<a href="/category/'+element.slug+'" class="item-title">'+count+'. '+str+'</a><br><hr>';
 				count++;
 			}
 		});
