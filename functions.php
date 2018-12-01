@@ -130,7 +130,7 @@ add_action( 'widgets_init', 'pozhelaju_widgets_init' );
  */
 function pozhelaju_scripts() {
 	
-	$ver = '1.02';
+	$ver = '1.03';
 	wp_enqueue_style( 'pozhelaju-bt', get_stylesheet_directory_uri().'/css/bootstrap.css', array(), $ver );
 	wp_enqueue_style( 'mobile-menu', get_stylesheet_directory_uri().'/css/jquery.mmenu.css', array(), $ver );
 	wp_enqueue_style( 'awesome', get_stylesheet_directory_uri().'/css/font-awesome.min.css', array(), $ver );

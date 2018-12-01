@@ -79,6 +79,11 @@
 				</div>
 			</div>
 		</nav>
+		<style type="text/css">
+			#menu {
+				display: none;
+			}
+		</style>
 		<?php wp_nav_menu( array(
 			'theme_location'  => 'menu-1',
 			'container'       => 'nav',
