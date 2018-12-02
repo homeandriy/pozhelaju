@@ -1632,3 +1632,14 @@ ul.list-holidays>li>a:hover {
 .item-title {
 		text-transform: capitalize;
 }
+.active-day {
+	background-color: #dc3545;
+	color: #fff;
+
+}
+.active-day >.current-date {
+	background-color: #666;
+}
+.active-day a {
+	color: #fff!important;
+}

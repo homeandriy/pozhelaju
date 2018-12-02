@@ -8,10 +8,26 @@
 		});
 		$('nav#menu').mmenu();
 
-
+		
 		$('.copy').on('click', function(event) {
 			/* Act on the event */
 			event.preventDefault();
+		});
+
+		$('#menu').css({visibility: 'visible'});
+
+		function mobile_content_top_fix () {
+			if(window.innerWidth < 990) {
+				$('.site-content').css({'margin-top': '1%'});
+			}
+			else {
+				$('.site-content').css({'margin-top': '0'});
+			}
+		}
+		mobile_content_top_fix();
+
+		$( window ).resize(function(event) {
+			mobile_content_top_fix();
 		});
 
 		var clipboard = new ClipboardJS('.copy');
@@ -123,7 +139,8 @@
 	var calendar = {
 		mounth : mo(),
 		yearYoSearch : 2018,
-		currentYear : currYear= new Date().getFullYear(),
+		currentYear : new Date().getFullYear(),
+		currentDay  : new Date().getDate(),
 		mounthName : {
 					'1' : 'Январь',
 					'2' : 'Февраль',
@@ -136,8 +153,7 @@
 					'9' : 'Сентябрь',
 					'10' : 'Октябрь',
 					'11' : 'Ноябрь',
-					'12' : 'Декабрь',
-
+					'12' : 'Декабрь'
 					}
 	}
 
@@ -178,28 +194,44 @@
 				// $('#misha_button').text('Загрузка, 5 сек...');
 			},
 			success: function( res ) {
+
+
+				// Перевіряємо чи відкрите меню?
+				// Якщо відкрите, то закриємо
+				if($('nav#menu').hasClass('mm-menu_opened')) {
+					$("nav#menu").data( "mmenu" ).close();
+				}
+
+				if($('#right_panel').hasClass('open_right_menu') ) {
+					show_right_panel(false);
+				}
+
+				$('#list_holidays').modal('show');
 				var list_cat = JSON.parse(res);
-				console.log(list_cat);
+				// console.log(list_cat);
 				var formatHTML = new String();
 
-		
-				
-				
-				// ++calendar.mounth;
-
-				console.log(calendar.currentYear);
 				$('#curr_mounth').text(calendar.mounthName[calendar.mounth]);
 				createCalendar("all_holidays", calendar.currentYear, calendar.mounth, list_cat.result);
 				// console.log( res );
 			}
 		});
 		
-		$('#list_holidays').modal('show');
+		
 		$('#list_holidays').css({
 			'background-color': 'rgba(2,2,2,.8)',
 			
 		});
 		
+	}
+
+	// Пеерключалка місяців
+	window.openMounth = function (evt) {
+		
+		var m = new Date($(evt.target).val()).getMonth();
+		calendar.mounth = ++m;
+
+		ajaxCalendar();
 	}
 	function createCalendar(id, year, month, objday) {
 		var elem = document.getElementById(id);
@@ -218,8 +250,12 @@
 
 		// ячейки календаря с датами
 		while (d.getMonth() == mon) {
-			console.log(d);
-			table += '<td><div class="current-date">' + d.getDate() + '</div><br>'+searchCurrentDateHolidays(d.getDate(), objday)+'</td>';
+			
+			// Змінна для того щоб виділити активний лень у календарі
+			var active = '';
+			if(d.getDate() === calendar.currentDay && new Date().getMonth() === mon)
+				active = 'active-day';
+			table += '<td class="'+active+'" ><div class="current-date">' + d.getDate() + '</div><br>'+searchCurrentDateHolidays(d.getDate(), objday)+'</td>';
 
 			if (getDay(d) % 7 == 6) { // вс, последний день - перевод строки
 				table += '</tr><tr>';
@@ -249,7 +285,7 @@
 		objectWhere.map( function(element){
 			holidaydate = new Date(element.meta_value).getDate();
 
-			console.log(holidaydate);
+			// console.log(holidaydate);
 			if(holidaydate === day) {
 				var str = element.name.replace(/(Поздравления|Поздравление)/gm, '');
 				htmlBuild += '<a href="/category/'+element.slug+'" class="item-title">'+count+'. '+str+'</a><br><hr>';
@@ -301,11 +337,16 @@
 
 	
 	$(document).on('click', '#right_panel', function(event) {
-		event.preventDefault();
-		/* Act on the event */
-		// var open = true;
-		console.log(open);
+		// event.preventDefault();
+
 		show_right_panel ( open ? false : true );
+		if(!open) {
+			$(this).addClass('open_right_menu');
+		}
+		else {
+			$(this).removeClass('open_right_menu');
+		}
+		
 		open = !open;
 	});
 

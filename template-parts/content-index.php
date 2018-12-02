@@ -40,7 +40,7 @@
 				 ?>
 
 			</p>
-			<a href="<?php echo esc_url( get_category_link( 1019 ) ) ?>" class="btn btn-primary" style="color:#fff">Смотреть все категории</a>
+			<a href="<?php echo esc_url( get_category_link( 1019 ) ) ?>" class="btn btn-primary" style="color:#fff">Еще..</a>
 		  </div>
 		</div>
 	</div>
@@ -66,7 +66,7 @@
 
 				 ?>
 			</p>
-			<a href="<?php echo esc_url( get_category_link( 979 ) ) ?>" class="btn btn-primary" style="color:#fff">Смотреть все категории</a>
+			<a href="<?php echo esc_url( get_category_link( 979 ) ) ?>" class="btn btn-primary" style="color:#fff">Еще..</a>
 		  </div>
 		</div>
 	</div>
@@ -92,7 +92,7 @@
 
 				 ?>
 			</p>
-			<a href="<?php echo esc_url( get_category_link( 1 ) ) ?>" class="btn btn-primary" style="color:#fff">Смотреть все категории</a>
+			<a href="<?php echo esc_url( get_category_link( 1 ) ) ?>" class="btn btn-primary" style="color:#fff">Еще..</a>
 		  </div>
 		</div>
 	</div>
@@ -127,7 +127,7 @@
 
 				 ?>
 			</p>
-			<a href="<?php echo esc_url( get_category_link( 1346 ) ) ?>" class="btn btn-primary" style="color:#fff">Смотреть все категории</a>
+			<a href="<?php echo esc_url( get_category_link( 1346 ) ) ?>" class="btn btn-primary" style="color:#fff">Еще..</a>
 		  </div>
 		</div>
 	</div>

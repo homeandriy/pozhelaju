@@ -63,7 +63,7 @@
     <div class="modal-content ">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">Календарь празников за год</h5>
-        <input type="date" name="date_holiday">
+        <input type="month" name="date_holiday" value="<?php echo date('Y-m')?>" style="margin-left: 15px;" onChange="openMounth(event)">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -71,7 +71,7 @@
       <div class="modal-body" >
         <div class="checker text-center ">
             <div id="move-mounth-to-end" class="float-left button-to-change-mounth"> << </div>
-            - <span id="curr_mounth" class="text-center" ><?php echo date(F); ?></span> -
+            - <span id="curr_mounth" class="text-center" ><?php echo date('F'); ?></span> -
             <div id="move-mounth-to-start" class="float-right button-to-change-mounth"> >> </div>
         </div>
         <div id="all_holidays"></div>

@@ -80,7 +80,7 @@ function insert_holidays_function() {
 			}
 		}
 	}
-	$html .= '</ul>';
+	$html .= '<li class="list_all_prazdniks"><a href="#">Еще...</a></li></ul>';
 	return $html;
 	// $get_all_holidays_by_range = $wpdb->get_results("SELECT * FROM $holiday_table WHERE meta_key = '__day_of_holiday'");
 

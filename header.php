@@ -66,7 +66,7 @@
 				</div>
 			</div>
 		</div>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top d-lg-none" id="mob_navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top d-lg-none container" id="mob_navbar">
 			<div class="row">
 				<div class="col-1">
 					<a href="#menu" class="alert-link"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></a>
@@ -81,7 +81,7 @@
 		</nav>
 		<style type="text/css">
 			#menu {
-				display: none;
+				visibility: hidden;
 			}
 		</style>
 		<?php wp_nav_menu( array(

@@ -31,11 +31,11 @@ function ___add_form_field_term_meta_text() { ?>
 	<?php wp_nonce_field( basename( __FILE__ ), 'term_meta_text_nonce' ); ?>
 	<div class="form-field term-meta-text-wrap">
 		<label for="term-meta-text"><?php _e( 'Отображать подкатегории списком', 'text_domain' ); ?></label>
-		<input type="checkbox" name="term_meta_text" id="term-meta-text" value="" class="term-meta-text-field" />
+		<input type="checkbox" name="term_meta_text" id="term-meta-text" value="<?php echo date('2018-m-d')?>" class="term-meta-text-field" />
 	</div>
 	<div class="form-field term-meta-text-wrap">
-		<label for="term-meta-text"><?php _e( 'Дата когда проходит праздник', 'text_domain' ); ?></label>
-		<input type="date" name="date_of_holiday" id="date_of_holiday" value="" class="term-meta-text-field" />
+		<label for="date_of_holidayterm-meta-text"><?php _e( 'Дата когда проходит праздник', 'text_domain' ); ?></label>
+		<input type="date" name="date_of_holiday" id="date_of_holiday" value="<?php echo date('2018-m-d')?>" class="term-meta-text-field" />
 	</div>
 <?php }
 
@@ -51,7 +51,7 @@ function ___edit_form_field_term_meta_text( $term ) {
 
 	if(!$date)
 	{
-		$date = '00:00:00';
+		$date = '2018-01-00';
 	}
 	else {
 		$formatdate = new DateTime($date);
@@ -76,8 +76,9 @@ function ___edit_form_field_term_meta_text( $term ) {
 		</td>
 		<td>
 			<div class="form-field term-meta-text-wrap">
-				<label for="term-meta-text"><?php _e( 'Дата когда проходит праздник', 'text_domain' ); ?></label>
+				<label for="date_of_holiday"><?php _e( 'Дата когда проходит праздник', 'text_domain' ); ?></label>
 				<input type="date" name="date_of_holiday" id="date_of_holiday" value="<?php echo $date; ?>" class="term-meta-text-field" />
+				<small>Тут буде автоматом підтягуватись 2018 рік, так як при цьому на сайті проходить правильна фільтрація, У випадку якщо було поставлено інший рік, а після збереження показадо 2018 рік, то паніку здіймати не потрібно, ВСЕ ДОБРЕ!!!</small>
 			</div>
 		</td>
 	</tr>
@@ -108,11 +109,23 @@ function ___save_term_meta_text( $term_id ) {
 
 	$new_date = isset( $_POST['date_of_holiday'] ) ?  $_POST['date_of_holiday'] : '';
 
-	$date_old  = get_term_meta( $term_id, '__day_of_holiday', true );
-	
-	if ( !empty($new_date) and $date_old !== $new_date )
-		update_term_meta( $term_id, '__day_of_holiday', $_POST['date_of_holiday'] );
+	if(!empty($new_date) ) {
+		$formatdate = new DateTime($new_date);
+		$mounth = date('m', strtotime($new_date));
+		$day    = date('d', strtotime($new_date));
+
+
+		// Можливо нова дата прийде не з міткою 2018 року, тому
+		// Забираємо місяць і день і формуємо нову дату у 2018 році
+		// Не самий нормальний метод, но діючий
+
+		$new_date = new DateTime('2018-'.$mounth.'-'.$day);
+		// error_log(serialize($new_date->format('Y-m-d')));
+		$date_old  = get_term_meta( $term_id, '__day_of_holiday', true );
 		
+		if ( !empty($new_date) and $date_old !== $new_date->format('Y-m-d') )
+			update_term_meta( $term_id, '__day_of_holiday', $new_date->format('Y-m-d') );
+	}
 }
 
 // MODIFY COLUMNS (add our meta to the list)
