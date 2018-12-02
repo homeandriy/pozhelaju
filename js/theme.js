@@ -191,11 +191,11 @@
 				param :  calendar
 			},
 			beforeSend: function() {
-				// $('#misha_button').text('Загрузка, 5 сек...');
+				$('#all_holidays').html('').html('<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
 			},
 			success: function( res ) {
 
-
+				
 				// Перевіряємо чи відкрите меню?
 				// Якщо відкрите, то закриємо
 				if($('nav#menu').hasClass('mm-menu_opened')) {

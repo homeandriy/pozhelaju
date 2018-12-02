@@ -448,7 +448,7 @@ function all_holidays_callback () {
 														JOIN $table_terms as tax ON  termmeta.term_id = tax.term_id 
 														WHERE termmeta.meta_key = '__day_of_holiday' AND termmeta.meta_value 
 														BETWEEN '".$start_date."' AND '". $tomorrowDATE."'");
-
+		// sleep(4);
 		echo json_encode(
 					array(	'status'=> 'success',
 							'result'=> $get_all_holidays_by_range,
