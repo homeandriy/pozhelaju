@@ -8,9 +8,6 @@
  */
 
 ?>
-<header class="entry-header sidebar-box-heading beck_color">
-    <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-</header><!-- .entry-header -->
 <div class="wrapper-post single-list-category bootom-border shadow" >
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
@@ -41,9 +38,7 @@
             </div>
 
         <!-- тут код для виїзду блока соціального  -->
-        <?php
-        the_content();
-        ?>
+        <?php the_content(); ?>
         <a href="<?php echo get_the_permalink()?>" class="read-more pull-right">Далее&nbsp;<i class="fa fa-arrow-right"></i></a>
         <button class="read-more pull-left copy" data-clipboard-target="#post_copy_<?php echo get_the_ID()?>"><i class="fa fa-clone"></i>&nbsp;Копировать</button>
 
