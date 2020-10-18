@@ -1,17 +1,15 @@
-## Webbooks Theme ##
-
+=== Books S3 ===
 Contributors: (this should be a list of wordpress.org userid's)
 Donate link: https://webbooks.com.ua/portfolio
-Tags: comments, spam
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
+Tags: S3 Storage
+Requires at least: 5.2
+Requires PHP: 7.2
+Tested up to: 5.2
+Stable tag: master
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-[![Build Status](https://camo.githubusercontent.com/f51101fd3a1a9f49bd78fbb8f2fe957bc4d68358/687474703a2f2f7068703772656164792e74696d6573706c696e7465722e63682f7068702d6170692d636c69656e74732f7472617669732f62616467652e737667)](https://travis-ci.org/joemccann/dillinger)
-
-#### Description ####
+== Description ==
 
 This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
 
